@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T17:42:02.780Z",
+  "title": "Design System: Crudo_",
+  "extensions": {
+    "colorMeta": {
+      "terracotta-red": {
+        "role": "primary",
+        "displayName": "Rojo Terracota",
+        "canonical": "#a33b21",
+        "tonalRamp": [
+          "#140e0c",
+          "#3d1b12",
+          "#662818",
+          "#8f351e",
+          "#ae533c",
+          "#c58472",
+          "#dbb5a9",
+          "#f1e5df"
+        ]
+      },
+      "darkroom-brown": {
+        "role": "secondary",
+        "displayName": "Marrón Cuarto Oscuro",
+        "canonical": "#57433c",
+        "tonalRamp": [
+          "#140e0c",
+          "#271d1a",
+          "#3a2c27",
+          "#4d3b35",
+          "#6c5a54",
+          "#968983",
+          "#c0b7b2",
+          "#eae6e2"
+        ]
+      },
+      "safelight-cream": {
+        "role": "tertiary",
+        "displayName": "Crema Luz de Seguridad",
+        "canonical": "#faf8d6",
+        "tonalRamp": [
+          "#140e0c",
+          "#565146",
+          "#97947f",
+          "#d9d7b9",
+          "#faf8da",
+          "#faf8e2",
+          "#faf8e9",
+          "#faf8f1"
+        ]
+      },
+      "proof-blue": {
+        "role": "tertiary",
+        "displayName": "Azul Prueba",
+        "canonical": "#b1d1e1",
+        "tonalRamp": [
+          "#140e0c",
+          "#414649",
+          "#6e7d86",
+          "#9bb5c3",
+          "#bad6e3",
+          "#cde0e8",
+          "#e0eaed",
+          "#f3f4f2"
+        ]
+      },
+      "ink-black": {
+        "role": "neutral",
+        "displayName": "Negro Tinta",
+        "canonical": "#111111",
+        "tonalRamp": [
+          "#140e0c",
+          "#130f0d",
+          "#12100f",
+          "#111110",
+          "#2f2f2e",
+          "#6b6a69",
+          "#a7a5a3",
+          "#e3e1dd"
+        ]
+      },
+      "paper-grey": {
+        "role": "neutral",
+        "displayName": "Gris Papel",
+        "canonical": "#f3f3f1",
+        "tonalRamp": [
+          "#140e0c",
+          "#544f4d",
+          "#93918f",
+          "#d3d2d0",
+          "#f4f4f1",
+          "#f6f5f2",
+          "#f8f6f3",
+          "#f9f8f4"
+        ]
+      },
+      "developer-salmon": {
+        "role": "neutral",
+        "displayName": "Salmón Revelador",
+        "canonical": "#f2b9a6",
+        "tonalRamp": [
+          "#140e0c",
+          "#533f38",
+          "#937064",
+          "#d2a190",
+          "#f3c1b0",
+          "#f5d1c4",
+          "#f7e2d8",
+          "#f9f2ec"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Titulares de hero en mayúscula, con fotos en paréntesis."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de sección."
+      },
+      "manifesto": {
+        "displayName": "Manifiesto",
+        "purpose": "Declaraciones de marca en serif itálica."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Etiquetas mono entre paréntesis y navegación."
+      }
+    },
+    "shadows": [
+      {
+        "name": "float",
+        "value": "0 24px 48px rgba(17,17,17,0.16)",
+        "purpose": "Tarjeta roja flotante."
+      },
+      {
+        "name": "lift",
+        "value": "0 18px 36px rgba(17,17,17,0.1)",
+        "purpose": "Packs al hover."
+      },
+      {
+        "name": "card",
+        "value": "0 20px 40px rgba(17,17,17,0.18)",
+        "purpose": "Fotos apiladas del mailclub."
+      },
+      {
+        "name": "clip",
+        "value": "drop-shadow(0 10px 12px rgba(0,0,0,0.38))",
+        "purpose": "El clip del revelado."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Hover y estados de componentes."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entradas de sección y titulares."
+      },
+      {
+        "name": "ease-reveal",
+        "value": "cubic-bezier(0.65, 0, 0.2, 1)",
+        "purpose": "Revelado de la foto (1.7s)."
+      },
+      {
+        "name": "ease-snap",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Rebote del clip."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tarjeta",
+        "value": "900px"
+      },
+      {
+        "name": "revelado",
+        "value": "800px"
+      },
+      {
+        "name": "nav",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón tinta",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Acción principal; hover a rojo.",
+      "html": "<button class=\"ds-btn-ink\">Hablemos ↗</button>",
+      "css": ".ds-btn-ink{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:999px;border:1px solid #111;background:#111;color:#fff;font:800 15px/1.2 Archivo,sans-serif;cursor:pointer;transition:background .35s cubic-bezier(.2,.8,.2,1),border-color .35s cubic-bezier(.2,.8,.2,1)}.ds-btn-ink:hover{background:#a33b21;border-color:#a33b21}.ds-btn-ink:focus-visible{outline:2px solid #a33b21;outline-offset:3px}"
+    },
+    {
+      "name": "Botón rojo",
+      "kind": "button",
+      "refersTo": "button-red",
+      "description": "Acción de marca; hover invierte a tinta.",
+      "html": "<button class=\"ds-btn-red\">Ver proyectos</button>",
+      "css": ".ds-btn-red{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:999px;border:1px solid #a33b21;background:#a33b21;color:#fff;font:800 15px/1.2 Archivo,sans-serif;cursor:pointer;transition:background .35s cubic-bezier(.2,.8,.2,1)}.ds-btn-red:hover{background:#111;border-color:#111}.ds-btn-red:focus-visible{outline:2px solid #a33b21;outline-offset:3px}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Filtro; seleccionado rellena de tinta.",
+      "html": "<button class=\"ds-chip\">Branding</button>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;padding:6px 14px;border-radius:999px;border:1px solid #111;background:transparent;color:#111;font:inherit;cursor:pointer;transition:background .35s cubic-bezier(.2,.8,.2,1),color .35s cubic-bezier(.2,.8,.2,1)}.ds-chip:hover,.ds-chip[aria-pressed=true]{background:#111;color:#fff}"
+    },
+    {
+      "name": "Pack",
+      "kind": "card",
+      "refersTo": "pack",
+      "description": "Tarjeta de precio con borde de tinta.",
+      "html": "<article class=\"ds-pack\"><span class=\"ds-lbl\">( 01 )</span><h3>Pack Base</h3><p>Detalle de qué incluye</p><b>$ —</b></article>",
+      "css": ".ds-pack{display:flex;flex-direction:column;gap:12px;min-height:280px;padding:24px;border:1px solid #111;border-radius:12px;color:#111;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s cubic-bezier(.2,.8,.2,1)}.ds-pack:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(17,17,17,.1)}.ds-pack h3{font:800 32px/1.15 Archivo,sans-serif;letter-spacing:-.03em}.ds-pack p{color:#444}.ds-pack b{margin-top:auto;font:800 26px Archivo,sans-serif}.ds-lbl{font:400 12px/1.4 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "field-underline",
+      "description": "Solo línea inferior; el foco pinta de rojo.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-lbl\">Nombre</span><input placeholder=\"Tu nombre\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px}.ds-lbl{font:400 12px/1.4 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}.ds-field input{background:transparent;border:0;border-bottom:1px solid #111;padding:8px 0;outline:none;border-radius:0;font:17px Archivo,sans-serif;transition:border-color .35s cubic-bezier(.2,.8,.2,1)}.ds-field input:focus,.ds-field input:not(:placeholder-shown){border-bottom-color:#a33b21}.ds-field input::placeholder{color:#57433c;opacity:.55}"
+    },
+    {
+      "name": "Etiqueta de sección",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Mono mayúscula entre paréntesis.",
+      "html": "<span class=\"ds-lbl\">( 01 ) Servicios</span>",
+      "css": ".ds-lbl{font:400 12px/1.4 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}.ds-lbl{color:#111}"
+    },
+    {
+      "name": "Capítulo marrón",
+      "kind": "custom",
+      "refersTo": "chapter-brown",
+      "description": "Campo de color a sangre con esquinas de 40px.",
+      "html": "<section class=\"ds-chapter\"><span class=\"ds-lbl\">( 03 ) Proceso</span><h2>Nuestro proceso.</h2></section>",
+      "css": ".ds-chapter{background:#57433c;color:#faf8d6;border-radius:40px 40px 0 0;padding:64px 32px}.ds-chapter h2{font:900 56px/.95 Archivo,sans-serif;letter-spacing:-.05em;margin-top:16px}.ds-lbl{font:400 12px/1.4 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.04em}"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Cuarto Oscuro",
+    "overview": "Crudo_ trata sus ideas como un archivo RAW: planas, grises y sin tocar hasta que alguien las revela. Todo el sistema visual sigue esa lógica de laboratorio fotográfico: titulares enormes y compactos, capítulos de color a sangre que se montan como hojas, y un clip que prende la foto como gesto de revelado.",
+    "keyCharacteristics": [
+      "Titulares en mayúscula, peso 900, tracking de −0.05em.",
+      "Fotos reales dentro de paréntesis tipográficos.",
+      "Capítulos de color a sangre con esquinas superiores de 40px.",
+      "Acentos en serif itálica roja y etiquetas mono entre paréntesis.",
+      "Cada sección aparece de a una, con blur que se aclara."
+    ],
+    "rules": [
+      {
+        "name": "La Regla del Un Solo Rojo",
+        "body": "El rojo terracota es el único color de acción.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Capítulo",
+        "body": "Un capítulo es un campo de color pleno a sangre, no una tarjeta con fondo.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Crema",
+        "body": "Sobre marrón y rojo el texto es crema, no blanco.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Serif de Acento",
+        "body": "La serif itálica en rojo aparece en una o dos palabras por pantalla.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Paréntesis",
+        "body": "Las etiquetas de sección y estados van entre paréntesis y en mono.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla de Plano en Reposo",
+        "body": "Una superficie no tiene sombra hasta que flota o responde al mouse.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Usar el rojo terracota como único color de acción.",
+      "Titulares en mayúscula, peso 900, tracking −0.05em.",
+      "Fotos reales dentro de paréntesis tipográficos.",
+      "Etiquetas mono en mayúscula entre paréntesis.",
+      "Pastillas de 999px para lo pulsable.",
+      "Capítulos que suben como hojas con esquinas de 40px.",
+      "Áreas de clic de 44px en navegación y pie.",
+      "Respetar prefers-reduced-motion."
+    ],
+    "donts": [
+      "Poner sombra a superficies que no flotan ni se apilan.",
+      "Meter una segunda tonalidad cálida como acento.",
+      "Usar blanco puro sobre marrón o rojo.",
+      "Dar caja o fondo a los campos de formulario.",
+      "Usar la serif itálica en párrafos largos.",
+      "Repetir el mismo color de capítulo en dos secciones seguidas.",
+      "Usar iconos genéricos o ilustraciones de stock."
+    ]
+  }
+}
