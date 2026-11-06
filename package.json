@@ -2,9 +2,14 @@
   "name": "crudo-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build"
+    "build": "next build",
+    "test:reveal": "node scripts/test-reveal.mjs",
+    "test:team": "node scripts/test-team.mjs"
   },
   "dependencies": {
     "@types/node": "^26.6.6",
