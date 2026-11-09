@@ -15,6 +15,22 @@ const PARAMS = [
 
 const vars = (o: Record<string, string | number>) => o as React.CSSProperties;
 
+/** Línea de tendencia: viewBox 100×40, valores 0–1 -> y. */
+const line = (arr: number[]) =>
+  arr.map((v, i) => `${i ? 'L' : 'M'}${((i / (N - 1)) * 100).toFixed(2)} ${(38 - Math.max(0, Math.min(1, v)) * 34).toFixed(2)}`).join('');
+const RAW_LINE = line(RAW_BARS);
+const DEV_LINE = line(DEV_BARS);
+const DEV_AREA = `${DEV_LINE}L100 40L0 40Z`;
+
+/** Mapa de calor 7×4 (día × franja): apagado en crudo, encendido al revelar. Determinista. */
+const HEAT = Array.from({ length: 28 }, (_, i) => {
+  const c = i % 7;
+  const rw = i / 7 | 0;
+  const r = 0.05 + 0.18 * Math.abs(Math.sin(i * 2.3));
+  const d = Math.min(1, 0.3 + 0.5 * Math.abs(Math.sin(i * 1.1 + 0.6)) + (c > 3 ? 0.2 : 0) + (rw === 2 ? 0.15 : 0));
+  return { r: r.toFixed(2), d: d.toFixed(2) };
+});
+
 /**
  * "Revelá tu idea": un clip de CSS puro hace de botón. Un checkbox oculto guarda el estado
  * y todo lo demás (círculo de revelado, contadores, histograma) se anima con :has() y @property.
@@ -48,21 +64,47 @@ export default function Develop({ src, alt, pos = 'center', head }: Props) {
           </label>
         </div>
 
-        <div className="rev__read" aria-hidden="true">
-          {PARAMS.map((p) => (
-            <div className="rev__param" key={p.k} style={vars({ '--a': p.a, '--b': p.b })}>
-              <span className="label">{p.k}</span>
-              <span className={`rev__val rev__val--${p.n}`} />
-              <span className="rev__bar"><i /></span>
+        {/* izquierda: anillo + mapa de calor */}
+        <div className="rev__side rev__side--l" aria-hidden="true">
+          <div className="rev__card">
+            <span className="label">Retención de video</span>
+            <div className="rev__donut">
+              <svg viewBox="0 0 100 100" focusable="false">
+                <circle className="trk" cx="50" cy="50" r="40" pathLength="100" />
+                <circle className="arc" cx="50" cy="50" r="40" pathLength="100" />
+              </svg>
+              <span className="rev__val rev__val--ret" />
             </div>
-          ))}
-          <div className="rev__hist">
-            <span className="label">Engagement · 30 días</span>
-            <div className="rev__bars">
-              {RAW_BARS.map((r, i) => (
-                <i key={i} style={vars({ '--r': r.toFixed(3), '--d': DEV_BARS[i].toFixed(3) })} />
+          </div>
+          <div className="rev__card">
+            <span className="label">Actividad semanal</span>
+            <div className="rev__heat">
+              {HEAT.map((h, i) => (
+                <i key={i} style={vars({ '--r': h.r, '--d': h.d })} />
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* derecha: tendencia + variación por métrica */}
+        <div className="rev__side rev__side--r" aria-hidden="true">
+          <div className="rev__card">
+            <span className="label">Engagement · 30 días</span>
+            <svg className="rev__spark" viewBox="0 0 100 40" focusable="false">
+              <path className="area" d={DEV_AREA} />
+              <path className="raw" d={RAW_LINE} />
+              <path className="dev" pathLength="1" d={DEV_LINE} />
+            </svg>
+          </div>
+          <div className="rev__card rev__card--div">
+            <span className="label">Variación</span>
+            {PARAMS.map((p) => (
+              <div className="rev__drow" key={p.k} style={vars({ '--a': p.a, '--b': p.b })}>
+                <span className="label">{p.k}</span>
+                <span className="rev__div"><i /></span>
+                <span className={`rev__val rev__val--${p.n}`} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
