@@ -113,7 +113,28 @@ export default function ProjectsList() {
   const collapseAndGo = (slug: string) => {
     setOne(slug, false);
     say('collapse');
-    document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const el = document.getElementById(slug);
+    if (!el) return;
+    // El documento se encoge mientras se recoge: un scroll "smooth" del navegador pelea con eso y se sacude.
+    // Se anima a mano, recalculando el destino en cada cuadro, y se suelta si la persona toca la rueda o la pantalla.
+    const top = () => el.getBoundingClientRect().top + window.scrollY - 64;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo({ top: top(), behavior: 'instant' }); return; }
+    const from = window.scrollY;
+    const t0 = performance.now();
+    const dur = 750;
+    let raf = 0;
+    const stop = () => { cancelAnimationFrame(raf); window.removeEventListener('wheel', stop); window.removeEventListener('touchstart', stop); window.removeEventListener('keydown', stop); };
+    window.addEventListener('wheel', stop, { passive: true });
+    window.addEventListener('touchstart', stop, { passive: true });
+    window.addEventListener('keydown', stop);
+    const step = (now: number) => {
+      const k = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - k, 3);
+      const to = top();
+      window.scrollTo({ top: from + (to - from) * e, behavior: 'instant' });
+      if (k < 1) raf = requestAnimationFrame(step); else stop();
+    };
+    raf = requestAnimationFrame(step);
   };
   const show = (p: Project) => filter === ALL || p.servicios.includes(filter);
 

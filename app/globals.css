@@ -668,7 +668,6 @@ html.rv-fallback footer .tw { animation-play-state: running; }
 
 /* ───────── Clippy, la mascota: asoma en algunas secciones y hace animaciones cortas ───────── */
 .mascot { --lx: 0px; --ly: 1px; position: fixed; right: -5px; bottom: 0; z-index: 40; translate: 0 0; width: 46px; height: 120px; pointer-events: none; transform: translateY(118%); transition: transform 0.8s cubic-bezier(0.34, 1.4, 0.64, 1), translate 0.4s var(--ease-out); }
-.mascot:has(.mascot__b:hover) .mascot__t { translate: -16px 0; }
 .mascot:not([data-pose="hide"]) { transform: translateY(8px); }
 .mascot[data-pose="read"] { --lx: -1.4px; --ly: 2.6px; }
 .mascot__b { position: relative; width: 100%; height: 100%; transform-origin: 50% 100%; pointer-events: auto; cursor: pointer; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.28)); -webkit-tap-highlight-color: transparent; }
@@ -714,7 +713,6 @@ html.rv-fallback footer .tw { animation-play-state: running; }
 /* mascota: lado izquierdo, caminata, poses nuevas, globo de texto y burbujas ZzZ */
 .mascot { transform-origin: 50% 100%; }
 .mascot[data-side="left"] { right: auto; left: -5px; }
-.mascot[data-side="left"]:has(.mascot__b:hover) .mascot__t { translate: 16px 0; }
 .mascot[data-walk="1"] { animation: mascot-walk 0.9s ease-in-out; }
 @keyframes mascot-walk { 0%, 100% { rotate: 0deg; } 15% { rotate: -9deg; } 30% { rotate: 7deg; } 45% { rotate: -6deg; } 60% { rotate: 4deg; } 78% { rotate: -2deg; } }
 .mascot[data-pose="team"] .mascot__b { animation: mascot-hop 0.9s cubic-bezier(0.3, 0, 0.3, 1) 0.6s 2; }
@@ -1330,3 +1328,112 @@ html.js [data-sec].is-in, html.rv-fallback [data-sec] { clip-path: inset(0 0 0 0
 .pj-rail__a[data-active="1"] { background: #fff; color: #000; opacity: 1; }
 .pj-rail__t { background: #fff; color: #000; }
 .pj-peek { width: 220px; }
+
+/* ───────── Clippy 2: cuerpo articulado, caras, movimiento por la pantalla, juego y ajustes ───────── */
+.mascot__pos { position: absolute; inset: 0; translate: var(--tx, 0px) var(--ty, 0px); }
+.mascot__s { width: 100%; height: 100%; transform-origin: 50% 100%; rotate: var(--lean, 0deg); animation: mc-breathe 4s ease-in-out infinite; }
+.mascot__b { cursor: grab; touch-action: none; }
+.mascot[data-drag="1"] .mascot__b { cursor: grabbing; }
+.mascot[data-hidden="1"] { transform: translateY(160%) !important; pointer-events: none; }
+.mascot[data-hidden="1"] .mascot__b { pointer-events: none; }
+@keyframes mc-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, 1.022); } }
+
+/* estirar y aplastar */
+.mascot__s[data-sq="crouch"] { animation: sq-crouch 0.12s ease-out both; }
+.mascot__s[data-sq="stretch"] { animation: sq-stretch 0.34s cubic-bezier(0.2, 0.8, 0.4, 1) both; }
+.mascot__s[data-sq="land"] { animation: sq-land 0.55s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+@keyframes sq-crouch { to { transform: scale(1.12, 0.84); } }
+@keyframes sq-stretch { 0% { transform: scale(1.1, 0.88); } 40% { transform: scale(0.88, 1.16); } 100% { transform: scale(1, 1); } }
+@keyframes sq-land { 0% { transform: scale(0.9, 1.12); } 22% { transform: scale(1.18, 0.78); } 50% { transform: scale(0.95, 1.07) skewX(-4deg); } 75% { transform: scale(1.03, 0.97) skewX(3deg); } 100% { transform: scale(1, 1); } }
+
+/* estados con el cuerpo: ronroneo, risa, susto, giro, fiesta, sentada y dormida de lado */
+.mascot[data-purr="1"] .mascot__s { animation: mc-purr 0.26s ease-in-out infinite; }
+@keyframes mc-purr { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.03, 0.98); } }
+.mascot[data-giggle="1"] .mascot__t { animation: mc-giggle 0.16s ease-in-out infinite; }
+@keyframes mc-giggle { 0%, 100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-3px); } }
+.mascot[data-scare="1"] .mascot__t { animation: mc-scare 0.6s cubic-bezier(0.3, 0, 0.3, 1); }
+@keyframes mc-scare { 0% { transform: none; } 25% { transform: translateY(-30px) scale(0.92, 1.12); } 70% { transform: translateY(0) scale(1.08, 0.9); } 100% { transform: none; } }
+.mascot[data-spin="1"] .mascot__t { animation: mc-spin-body 1.05s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: 50% 60%; }
+@keyframes mc-spin-body { from { transform: rotate(0); } to { transform: rotate(720deg); } }
+.mascot[data-disco="1"] .mascot__b { animation: mc-disco 0.9s linear infinite; }
+.mascot[data-disco="1"] .mascot__t { animation: mc-dance 0.5s ease-in-out infinite; }
+@keyframes mc-disco { from { filter: hue-rotate(0deg) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.28)); } to { filter: hue-rotate(360deg) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.28)); } }
+@keyframes mc-dance { 0%, 100% { transform: rotate(-10deg) translateY(0) scale(1.02, 0.97); } 50% { transform: rotate(10deg) translateY(-10px) scale(0.97, 1.04); } }
+.mascot[data-sit="1"][data-pose="bye"] .mascot__s { translate: 0 6px; scale: 1.06 0.88; }
+.mascot[data-sleep="1"] .mascot__s { rotate: -82deg; translate: -8px 4px; transition: rotate 0.9s var(--ease-out), translate 0.9s var(--ease-out); }
+.mascot[data-sleep="1"][data-side="left"] .mascot__s { rotate: 82deg; translate: 8px 4px; }
+
+/* cara: boca, ojos y mejillas según la expresión */
+.mascot .m { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity 0.2s var(--ease); }
+.mascot .m--grin, .mascot .m--o, .mascot .m--yawn { fill: var(--ink); stroke: none; }
+.mascot .m--smile { opacity: 1; }
+.mascot[data-face="happy"] .m--smile, .mascot[data-face="love"] .m--smile, .mascot[data-face="wow"] .m--smile, .mascot[data-face="sad"] .m--smile,
+.mascot[data-face="think"] .m--smile, .mascot[data-face="sleepy"] .m--smile, .mascot[data-face="yawn"] .m--smile,
+.mascot[data-angry="1"] .m--smile, .mascot[data-dizzy="1"] .m--smile, .mascot[data-sleep="1"] .m--smile { opacity: 0; }
+.mascot[data-face="happy"] .m--grin, .mascot[data-face="love"] .m--grin { opacity: 1; }
+.mascot[data-face="wow"] .m--o { opacity: 1; }
+.mascot[data-face="sad"] .m--sad, .mascot[data-angry="1"] .m--sad { opacity: 1; }
+.mascot[data-face="think"] .m--flat, .mascot[data-face="sleepy"] .m--flat, .mascot[data-dizzy="1"] .m--flat, .mascot[data-sleep="1"] .m--flat { opacity: 1; }
+.mascot[data-face="yawn"] .m--yawn { opacity: 1; }
+.mascot .eye__arc { fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; opacity: 0; }
+.mascot .eye__heart { fill: #e8506b; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.mascot[data-face="happy"] .eye__w, .mascot[data-face="happy"] .eye__p { opacity: 0; }
+.mascot[data-face="happy"] .eye__arc { opacity: 1; }
+.mascot[data-face="love"] .eye__p { opacity: 0; }
+.mascot[data-face="love"] .eye__heart { opacity: 1; animation: eye-beat 0.7s ease-in-out infinite; }
+@keyframes eye-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+.mascot[data-face="wow"] .eye__w { transform-box: fill-box; transform-origin: center; transform: scale(1.22); }
+.mascot[data-face="wow"] .eye__p { r: 2.1px; }
+.mascot[data-face="sleepy"] .eye, .mascot[data-face="yawn"] .eye { animation: none; transform-box: fill-box; transform-origin: center; transform: scaleY(0.55); }
+.mascot[data-face="yawn"] .eye { transform: scaleY(0.3); }
+.mascot[data-face="think"] .eye__p { transform: translate(2.4px, -2.4px); }
+.mascot .brow--up { opacity: 0 !important; }
+.mascot[data-face="think"] .brow--up:last-of-type { opacity: 1 !important; }
+.mascot[data-angry="1"] .brow:not(.brow--up) { opacity: 1; }
+.mascot .blush { fill: #f08a9a; opacity: 0; transition: opacity 0.3s var(--ease); }
+.mascot[data-face="happy"] .blush, .mascot[data-face="love"] .blush { opacity: 0.65; }
+
+/* corazones al recibir mimos */
+.emo--hearts { left: 4px; top: -26px; width: 38px; height: 30px; }
+.emo--hearts svg { position: absolute; bottom: 0; width: 13px; height: 13px; fill: #e8506b; opacity: 0; }
+.emo--hearts .h0 { left: 2px; } .emo--hearts .h1 { left: 12px; width: 16px; height: 16px; } .emo--hearts .h2 { left: 26px; }
+.mascot[data-emo="love"] .emo--hearts { opacity: 1; }
+.mascot[data-emo="love"] .emo--hearts svg { animation: emo-heart 1.4s ease-out infinite; }
+.mascot[data-emo="love"] .emo--hearts .h1 { animation-delay: 0.35s; }
+.mascot[data-emo="love"] .emo--hearts .h2 { animation-delay: 0.7s; }
+@keyframes emo-heart { 0% { opacity: 0; transform: translateY(8px) scale(0.5); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(-26px) scale(1.15) rotate(8deg); } }
+
+/* ajustes de Clippy */
+.cl-ctl { position: fixed; right: 10px; bottom: 138px; z-index: 46; }
+.cl-ctl__btn { width: 34px; height: 34px; display: grid; place-items: center; padding: 0; border: 1px solid var(--ink); border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); transition: transform 0.3s var(--ease-out), background 0.3s var(--ease); }
+.cl-ctl__btn:hover { transform: scale(1.08) rotate(-8deg); }
+.cl-ctl__btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cl-ctl[data-off="1"] .cl-ctl__btn { opacity: 0.65; }
+.cl-ctl__btn:focus-visible, .cl-ctl__go:focus-visible, .cl-sw input:focus-visible + .cl-sw__k { outline: 2px solid var(--red); outline-offset: 2px; }
+.cl-ctl__panel { position: absolute; right: 0; bottom: calc(100% + 10px); width: 252px; display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 16px; border: 1px solid var(--ink); border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25); animation: cl-pop 0.3s var(--ease-out); transform-origin: 100% 100%; }
+@keyframes cl-pop { from { opacity: 0; transform: translateY(8px) scale(0.94); } to { opacity: 1; transform: none; } }
+.cl-ctl__t { font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -0.02em; }
+.cl-ctl__t--s { margin-top: 4px; font-size: 14px; }
+.cl-sw { position: relative; display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
+.cl-sw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cl-sw__k { position: relative; flex: none; width: 34px; height: 20px; border-radius: 999px; background: color-mix(in oklab, var(--ink) 18%, transparent); transition: background 0.25s var(--ease); }
+.cl-sw__k::after { content: ''; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); transition: transform 0.3s var(--ease-out); }
+.cl-sw input:checked + .cl-sw__k { background: var(--red); }
+.cl-sw input:checked + .cl-sw__k::after { transform: translateX(14px); }
+.cl-ctl__go { padding: 9px 14px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+.cl-ctl__go:hover:not(:disabled) { background: #fff; color: var(--ink); }
+.cl-ctl__go:disabled { opacity: 0.4; cursor: default; }
+.cl-ctl__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: 12.5px; opacity: 0.85; }
+.cl-ctl__list li[data-found="1"] { color: var(--red); font-weight: 600; opacity: 1; }
+@media (max-width: 700px) { .cl-ctl { bottom: 106px; } .cl-ctl__panel { width: min(252px, calc(100vw - 28px)); } }
+
+/* confeti y nubes de polvo */
+.clippy-fx { position: fixed; inset: 0; z-index: 95; overflow: hidden; pointer-events: none; }
+.clippy-conf { position: absolute; display: block; will-change: transform; }
+.clippy-puff { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot__s, .mascot__s[data-sq], .mascot[data-purr="1"] .mascot__s, .mascot[data-giggle="1"] .mascot__t, .mascot[data-scare="1"] .mascot__t, .mascot[data-spin="1"] .mascot__t, .mascot[data-disco="1"] .mascot__b, .mascot[data-disco="1"] .mascot__t, .emo--hearts svg, .mascot .eye__heart { animation: none !important; }
+  .mascot[data-sleep="1"] .mascot__s { transition: none; }
+  .cl-ctl__panel { animation: none; }
+}

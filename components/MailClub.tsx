@@ -79,7 +79,14 @@ function MailEdition({ e, flip }: { e: Edition; flip: boolean }) {
     }
   };
 
+  /** Confeti sobre el sobre al abrirlo. */
+  const burst = () => {
+    const r = stage.current?.getBoundingClientRect();
+    if (r) window.dispatchEvent(new CustomEvent('clippy:fx', { detail: { x: r.left + r.width / 2, y: r.top + r.height * 0.5, count: 42, colors: [e.accent, e.ink, e.accent, e.ink, e.bg, e.accent] } }));
+  };
+
   const toggle = () => {
+    if (!open) burst();
     say(open ? 'mailclose' : 'mailopen', `mc-${e.id}`);
     setOpen((o) => !o);
     setHot(null);
@@ -87,7 +94,7 @@ function MailEdition({ e, flip }: { e: Edition; flip: boolean }) {
   };
 
   const pick = (id: string) => {
-    if (!open) { say('mailopen', `mc-${e.id}`); setOpen(true); }
+    if (!open) { burst(); say('mailopen', `mc-${e.id}`); setOpen(true); }
     bring(focus === id ? null : id);
   };
 

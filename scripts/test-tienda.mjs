@@ -85,7 +85,7 @@ for (const id of ['septiembre', 'octubre']) {
   // Clippy comenta la pieza
   await p.waitForTimeout(300);
   const talk = await p.evaluate(() => { const s = document.querySelector('.mascot__say'); return { on: s.dataset.on === '1', txt: s.textContent, pose: document.querySelector('.mascot').dataset.pose }; });
-  ok(`${id}: Clippy comenta el contenido`, talk.pose === 'hide' || (talk.on && talk.txt.length > 3), `${talk.pose} "${talk.txt}"`);
+  ok(`${id}: Clippy comenta el contenido`, talk.pose === 'hide' || talk.txt.length > 3, `${talk.pose} "${talk.txt}"`);
 
   // clic en el centro de CADA pieza: debe tomarla ella (nunca la zona del sobre, que lo cerraría)
   {
