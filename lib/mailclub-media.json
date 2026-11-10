@@ -1,0 +1,169 @@
+{
+  "septiembre": {
+    "layers": {
+      "closed": {
+        "src": "/mailclub/septiembre/sobre-closed.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "back": {
+        "src": "/mailclub/septiembre/sobre-back.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "content": {
+        "src": "/mailclub/septiembre/sobre-content.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "front": {
+        "src": "/mailclub/septiembre/sobre-front.webp",
+        "w": 960,
+        "h": 1200
+      }
+    },
+    "pieces": {
+      "libreta": {
+        "src": "/mailclub/septiembre/libreta.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "libreta-blanca": {
+        "src": "/mailclub/septiembre/libreta-blanca.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "carta": {
+        "src": "/mailclub/septiembre/carta.webp",
+        "w": 976,
+        "h": 527
+      },
+      "sudoku": {
+        "src": "/mailclub/septiembre/sudoku.webp",
+        "w": 701,
+        "h": 1000
+      },
+      "receta": {
+        "src": "/mailclub/septiembre/receta.webp",
+        "w": 1000,
+        "h": 671
+      },
+      "receta-dorso": {
+        "src": "/mailclub/septiembre/receta-dorso.webp",
+        "w": 1000,
+        "h": 683
+      },
+      "separador": {
+        "src": "/mailclub/septiembre/separador.webp",
+        "w": 334,
+        "h": 1000
+      },
+      "separador-dorso": {
+        "src": "/mailclub/septiembre/separador-dorso.webp",
+        "w": 334,
+        "h": 1000
+      },
+      "lacre": {
+        "src": "/mailclub/septiembre/lacre.webp",
+        "w": 417,
+        "h": 418
+      },
+      "lirio": {
+        "src": "/mailclub/septiembre/lirio.webp",
+        "w": 455,
+        "h": 465
+      },
+      "corazon": {
+        "src": "/mailclub/septiembre/corazon.webp",
+        "w": 488,
+        "h": 451
+      },
+      "encaje": {
+        "src": "/mailclub/septiembre/encaje.webp",
+        "w": 590,
+        "h": 404
+      }
+    }
+  },
+  "octubre": {
+    "layers": {
+      "closed": {
+        "src": "/mailclub/octubre/sobre-closed.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "back": {
+        "src": "/mailclub/octubre/sobre-back.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "content": {
+        "src": "/mailclub/octubre/sobre-content.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "front": {
+        "src": "/mailclub/octubre/sobre-front.webp",
+        "w": 960,
+        "h": 1200
+      }
+    },
+    "pieces": {
+      "poster": {
+        "src": "/mailclub/octubre/poster.webp",
+        "w": 801,
+        "h": 1000
+      },
+      "carta": {
+        "src": "/mailclub/octubre/carta.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "separador": {
+        "src": "/mailclub/octubre/separador.webp",
+        "w": 342,
+        "h": 1000
+      },
+      "separador-dorso": {
+        "src": "/mailclub/octubre/separador-dorso.webp",
+        "w": 342,
+        "h": 1000
+      },
+      "papel-rojo": {
+        "src": "/mailclub/octubre/papel-rojo.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "papel-negro": {
+        "src": "/mailclub/octubre/papel-negro.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "direccion": {
+        "src": "/mailclub/octubre/direccion.webp",
+        "w": 1000,
+        "h": 711
+      },
+      "calabaza": {
+        "src": "/mailclub/octubre/calabaza.webp",
+        "w": 426,
+        "h": 433
+      },
+      "castillo": {
+        "src": "/mailclub/octubre/castillo.webp",
+        "w": 210,
+        "h": 499
+      },
+      "cuervo": {
+        "src": "/mailclub/octubre/cuervo.webp",
+        "w": 250,
+        "h": 472
+      },
+      "murcielago": {
+        "src": "/mailclub/octubre/murcielago.webp",
+        "w": 479,
+        "h": 253
+      }
+    }
+  }
+}

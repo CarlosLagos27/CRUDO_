@@ -14,6 +14,7 @@ const POSES: [string, Exclude<Pose, 'hide' | 'cheer'>][] = [
   ['.band-red, .tiles', 'point'],
   ['footer', 'bye'],
   ['@pj', 'hop'],
+  ['.mc-card', 'hop'],
   ['.chapter:not(.develop-sec)', 'hop'],
 ];
 
@@ -35,6 +36,9 @@ const SAY: Record<string, string[]> = {
   angry: ['Ey, con calma.', 'Pará un poquito.', 'Mmm... ya, ya.', 'Con suavidad, che.'],
   calm: ['Bueno, ya pasó.', 'Estoy bien, estoy bien.'],
   wake: ['¡Ah! ¿Qué pasó?', 'No estaba dormida.', '¿Eh? Ya voy.'],
+  mailopen: ['¡Abriste el sobre!', '¿Qué trae este mes?', 'Me encantan las sorpresas.', 'Mirá todo lo que sale.'],
+  mailclose: ['Sobre cerrado, misterio guardado.', 'Ya lo guardo.'],
+  mailpiece: ['Esa pieza es de mis favoritas.', 'Qué detalle tan lindo.', 'Los detalles importan.'],
   expand: ['¡Mirá cuánto hay para ver!', 'Acá viene lo bueno.', 'Desplegando el proyecto completo.'],
   collapse: ['Listo, lo guardo.', 'Recogido. ¿Cuál sigue?'],
   expandAll: ['¡Todo a la vista!', 'Uf, cuánto material.'],
