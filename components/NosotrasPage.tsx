@@ -3,7 +3,8 @@ import Footer from '@/components/Footer';
 import StoryCard from '@/components/StoryCard';
 import Develop from '@/components/Develop';
 import TeamCarousel from '@/components/TeamCarousel';
-import { NextTiles, ParenPhoto, SectionLabel } from '@/components/Parts';
+import Steps from '@/components/Steps';
+import { NextTiles, SectionLabel } from '@/components/Parts';
 import { PHOTOS } from '@/lib/data';
 
 const lines: [string, string][] = [
@@ -68,14 +69,7 @@ export default function NosotrasPage() {
           </div>
         </section>
 
-        <section className="wrap statement">
-          <h2 className="display" data-rv>
-            <span className="paren">La idea <ParenPhoto k="idea" /></span>
-            <span className="paren">el proceso <ParenPhoto k="proceso" /></span>
-            <span className="paren">y el <ParenPhoto k="resultado" red /> resultado</span>
-          </h2>
-          <p className="label muted" style={{ marginTop: 32 }}>( Pasá el mouse por las fotos )</p>
-        </section>
+        <Steps />
 
         <section data-sec className="chapter chapter--blue team-sec">
           <div className="wrap team-head">

@@ -17,7 +17,7 @@ p.on('response', (r) => { if (r.status() >= 400) bad.push(`${r.status()} ${r.url
 await p.goto('http://localhost:3000/proyectos/', { waitUntil: 'networkidle' });
 
 ok('8 casos', (await p.locator('section.pj').count()) === 8);
-ok('índice con 8 filas', (await p.locator('.proj-table tbody tr').count()) === 8);
+ok('índice con 8 filas', (await p.locator('.pj-list li').count()) === 8);
 
 // por defecto, los casos están recogidos
 const h0 = await p.evaluate(() => document.querySelector('#piccolino .pj__more').getBoundingClientRect().height);
@@ -62,8 +62,8 @@ await p.waitForTimeout(500);
 await p.screenshot({ path: `${OUT}/pj-top.png` });
 
 // vista previa al pasar por el índice
-await p.locator('.proj-table tbody tr').nth(2).scrollIntoViewIfNeeded();
-await p.locator('.proj-table tbody tr').nth(2).hover();
+await p.locator('.pj-list li').nth(2).scrollIntoViewIfNeeded();
+await p.locator('.pj-list li').nth(2).hover();
 await p.waitForTimeout(500);
 ok('vista previa del índice', (await p.locator('.pj-peek').getAttribute('data-on')) === '1');
 await p.screenshot({ path: `${OUT}/pj-peek.png` });
@@ -93,14 +93,14 @@ ok('el video de Archetype se reproduce solo a la vista', playing);
 
 // filtro
 await p.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-await p.getByRole('button', { name: 'Audiovisual', exact: true }).click();
+await p.getByRole('button', { name: /^Audiovisual/ }).click();
 await p.waitForTimeout(150);
 const leaving = await p.locator('section.pj[data-phase="out"]').count();
 ok('al filtrar, los casos salen con animación', leaving === 6, leaving + ' saliendo');
 await p.waitForTimeout(700);
 const visible = await p.evaluate(() => [...document.querySelectorAll('section.pj')].filter((s) => !s.hidden).map((s) => s.id));
 ok('filtro Audiovisual muestra Archetype y Malcriada', visible.sort().join() === 'archetype,malcriada', visible.join());
-await p.getByRole('button', { name: 'Todos', exact: true }).click();
+await p.getByRole('button', { name: /^Todos/ }).click();
 await p.waitForTimeout(200);
 const entering = await p.locator('section.pj[data-phase="in"]').count();
 ok('al quitar el filtro, los casos entran con animación', entering === 8, entering + ' entrando');

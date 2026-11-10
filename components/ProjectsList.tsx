@@ -57,7 +57,7 @@ function Peek({ slug }: { slug: string }) {
     if (!mounted || !slug) { wasOn.current = false; return; }
     if (!wasOn.current) { pos.current = { ...target.current }; wasOn.current = true; } // al aparecer, arranca bajo el puntero
     let raf = 0;
-    let lastX = pos.current.x;
+    let lastX = pos.current.y;
     const tick = () => {
       const node = el.current;
       if (node) {
@@ -67,11 +67,11 @@ function Peek({ slug }: { slug: string }) {
         const p = pos.current;
         p.x += (t.x - p.x) * 0.22;
         p.y += (t.y - p.y) * 0.22;
-        const flip = t.x + 30 + w > window.innerWidth - 8; // si no cabe a la derecha, pasa a la izquierda
-        const x = Math.max(8, Math.min(window.innerWidth - w - 8, flip ? p.x - 30 - w : p.x + 30));
+        // anclada al borde derecho: no tapa los nombres grandes de la izquierda; solo acompaña al puntero en vertical
+        const x = Math.max(8, window.innerWidth - w - 28);
         const y = Math.max(8, Math.min(window.innerHeight - h - 8, p.y - h / 2));
-        const rot = Math.max(-7, Math.min(7, (p.x - lastX) * 0.5)); // se inclina un poco según la velocidad
-        lastX = p.x;
+        const rot = Math.max(-5, Math.min(5, (p.y - lastX) * 0.35)); // se inclina un poco según la velocidad
+        lastX = p.y;
         node.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot.toFixed(2)}deg)`;
       }
       raf = requestAnimationFrame(tick);
@@ -102,6 +102,8 @@ export default function ProjectsList() {
   const [filter, setFilter] = useState(ALL);
   const [box, setBox] = useState<{ slug: string; i: number } | null>(null);
   const [peek, setPeek] = useState('');
+  const [rail, setRail] = useState(false);
+  const [active, setActive] = useState('');
   const [opened, setOpened] = useState<string[]>([]);
   /** 'out': saliendo, 'gone': oculto, 'in': entrando; sin valor: estable. */
   const [phase, setPhase] = useState<Record<string, 'in' | 'out' | 'gone'>>({});
@@ -144,13 +146,55 @@ export default function ProjectsList() {
       setPeek('');
       window.clearTimeout(t);
       t = window.setTimeout(() => {
-        const row = (document.elementFromPoint(px, py) as HTMLElement | null)?.closest<HTMLElement>('tr[data-slug]');
+        const row = (document.elementFromPoint(px, py) as HTMLElement | null)?.closest<HTMLElement>('[data-slug]');
         if (row?.dataset.slug) setPeek(row.dataset.slug);
       }, 160);
     };
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('scroll', onScroll); window.clearTimeout(t); };
+  }, []);
+
+  // la URL puede traer #proyecto (desde otra página o al cambiar el hash): se abre el caso y se lleva a la vista
+  useEffect(() => {
+    let t = 0;
+    const openFromHash = () => {
+      const h = decodeURIComponent(window.location.hash.slice(1));
+      if (!h || !PROJECTS.some((p) => p.slug === h)) return;
+      setOne(h, true);
+      window.clearTimeout(t);
+      t = window.setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: 'start' }), 150);
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    return () => { window.removeEventListener('hashchange', openFromHash); window.clearTimeout(t); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // riel lateral: se muestra mientras se recorren los casos y marca el que está en el centro de la pantalla
+  useEffect(() => {
+    let raf = 0;
+    const calc = () => {
+      raf = 0;
+      const secs = Array.from(document.querySelectorAll<HTMLElement>('section.pj')).filter((s) => !s.hidden);
+      if (!secs.length) { setRail(false); setActive(''); return; }
+      const vh = window.innerHeight;
+      const first = secs[0].getBoundingClientRect();
+      const last = secs[secs.length - 1].getBoundingClientRect();
+      setRail(first.top < vh * 0.55 && last.bottom > vh * 0.45);
+      let cur = '';
+      for (const s of secs) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= vh * 0.45 && r.bottom > vh * 0.45) cur = s.id;
+      }
+      setActive(cur);
+    };
+    const on = () => { if (!raf) raf = requestAnimationFrame(calc); };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    const t = window.setInterval(on, 600); // las secciones cambian de alto al desplegarse o filtrarse
+    return () => { window.removeEventListener('scroll', on); window.removeEventListener('resize', on); window.clearInterval(t); cancelAnimationFrame(raf); };
   }, []);
 
   // las piezas aparecen al llegar a la pantalla (también las de casos que se vuelven a mostrar al filtrar)
@@ -174,7 +218,7 @@ export default function ProjectsList() {
         <div className="filters label" role="group" aria-label="Filtrar por servicio">
           {[ALL, ...FILTERS].map((s) => (
             <button key={s} className="chip label" aria-pressed={filter === s} onClick={() => applyFilter(s)}>
-              {s}
+              {s}<span className="chip__n">{s === ALL ? PROJECTS.length : PROJECTS.filter((p) => p.servicios.includes(s)).length}</span>
             </button>
           ))}
           <span key={shown.length} className="pj-count label" aria-live="polite">{shown.length} de {PROJECTS.length} proyectos</span>
@@ -189,33 +233,33 @@ export default function ProjectsList() {
       </div>
 
       <section className="wrap section--tight pj-index" style={{ borderTop: '1px solid var(--ink)' }}>
-        <div className="table-box">
-          <table className="proj-table">
-            <thead>
-              <tr className="label">
-                <th>Nº</th><th>Cliente</th><th>Rubro</th><th>Servicios</th>
-              </tr>
-            </thead>
-            <tbody>
-              {PROJECTS.map((p) => (
-                <tr
-                  key={p.n}
-                  hidden={gone(p)}
-                  data-phase={phase[p.slug] || undefined}
-                  style={css({ '--k': Math.max(0, shown.indexOf(p)) })}
-                  data-slug={p.slug}
-                  onMouseEnter={() => setPeek(p.slug)}
-                  onMouseLeave={() => setPeek('')}
-                >
-                  <td className="label red"><a href={`#${p.slug}`} tabIndex={-1} aria-hidden="true">{p.n}</a></td>
-                  <td><a className="pj-index__name" href={`#${p.slug}`} onClick={() => setOne(p.slug, true)}>{p.cliente}<span className="pj-index__arr" aria-hidden="true">↓</span></a></td>
-                  <td>{p.rubro}</td>
-                  <td>{p.servicios.join(', ')}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ol className="pj-list" aria-label="Índice de clientes">
+          {PROJECTS.map((p) => {
+            const m = PROJECT_MEDIA[p.slug];
+            const pieces = m.gallery.length + 1 + (m.video ? 1 : 0);
+            return (
+              <li
+                key={p.n}
+                hidden={gone(p)}
+                data-phase={phase[p.slug] || undefined}
+                data-slug={p.slug}
+                style={css({ '--k': Math.max(0, shown.indexOf(p)), '--rc': p.bg, '--ri': p.ink })}
+                onMouseEnter={() => setPeek(p.slug)}
+                onMouseLeave={() => setPeek('')}
+              >
+                <a className="pj-row" href={`#${p.slug}`} onClick={() => setOne(p.slug, true)}>
+                  <span className="pj-row__n label">{p.n}</span>
+                  <span className="pj-row__thumb" aria-hidden="true"><img src={m.cover.src} alt="" loading="lazy" decoding="async" /></span>
+                  <span className="pj-row__name">{p.cliente}</span>
+                  <span className="pj-row__rubro">{p.rubro}</span>
+                  <span className="pj-row__tags">{p.servicios.map((s) => <i key={s} className="label">{s}</i>)}</span>
+                  <span className="pj-row__meta label">{pieces} piezas</span>
+                  <span className="pj-row__go" aria-hidden="true">↓</span>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
         <Peek slug={peek} />
       </section>
 
@@ -326,6 +370,24 @@ export default function ProjectsList() {
           </section>
         );
       })}
+
+      <nav className="pj-rail" data-on={rail ? '1' : '0'} aria-label="Ir a un proyecto" aria-hidden={!rail}>
+        {shown.map((p) => (
+          <a
+            key={p.slug}
+            href={`#${p.slug}`}
+            className="pj-rail__a"
+            data-active={active === p.slug ? '1' : '0'}
+            tabIndex={rail ? 0 : -1}
+            style={css({ '--rc': p.bg, '--ri': p.ink })}
+            onClick={() => setOne(p.slug, true)}
+            aria-label={p.cliente}
+          >
+            <span className="label">{p.n}</span>
+            <span className="pj-rail__t" aria-hidden="true">{p.cliente}</span>
+          </a>
+        ))}
+      </nav>
 
       {box && boxProject && (
         <Lightbox
