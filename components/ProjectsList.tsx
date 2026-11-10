@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { PROJECTS, PROJECT_MEDIA, SERVICES, type Project, type ProjectImage } from '@/lib/data';
 import Lightbox from '@/components/Lightbox';
 import AutoVideo from '@/components/AutoVideo';
@@ -8,7 +9,13 @@ import AutoVideo from '@/components/AutoVideo';
 const ALL = 'Todos';
 const FILTERS = SERVICES.filter((s) => PROJECTS.some((p) => p.servicios.includes(s)));
 
+/** Avisa a Clippy (ClipMascot) de lo que está pasando en la lista. */
+const say = (group: string) => window.dispatchEvent(new CustomEvent('clippy:say', { detail: { group } }));
+
 const css = (o: Record<string, string | number>) => o as React.CSSProperties;
+
+/** Largo de la palabra más larga del nombre: el título se achica para que ninguna palabra se parta. */
+const longest = (s: string) => Math.max(...s.split(' ').map((w) => w.length));
 
 /** Elige texto claro u oscuro sobre un color de muestra. */
 function readable(hex: string) {
@@ -25,21 +32,126 @@ function itemsOf(p: Project): { all: ProjectImage[]; main: ProjectImage[]; stori
   return { all: [m.cover, ...main, ...stories], main, stories, offMain: 1, offStories: 1 + main.length };
 }
 
+/**
+ * Miniatura que acompaña al puntero sobre el índice. Se dibuja en <body>: las secciones usan will-change/filter
+ * y convertirían un position:fixed en relativo a la sección (se movía con el scroll y las demás secciones la tapaban).
+ */
+function Peek({ slug }: { slug: string }) {
+  const el = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [last, setLast] = useState(slug);
+  const target = useRef({ x: -999, y: -999 });
+  const pos = useRef({ x: -999, y: -999 });
+  const wasOn = useRef(false);
+
+  useEffect(() => setMounted(true), []);
+  useEffect(() => { if (slug) setLast(slug); }, [slug]);
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => { target.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => window.removeEventListener('pointermove', onMove);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || !slug) { wasOn.current = false; return; }
+    if (!wasOn.current) { pos.current = { ...target.current }; wasOn.current = true; } // al aparecer, arranca bajo el puntero
+    let raf = 0;
+    let lastX = pos.current.x;
+    const tick = () => {
+      const node = el.current;
+      if (node) {
+        const w = node.offsetWidth;
+        const h = node.offsetHeight;
+        const t = target.current;
+        const p = pos.current;
+        p.x += (t.x - p.x) * 0.22;
+        p.y += (t.y - p.y) * 0.22;
+        const flip = t.x + 30 + w > window.innerWidth - 8; // si no cabe a la derecha, pasa a la izquierda
+        const x = Math.max(8, Math.min(window.innerWidth - w - 8, flip ? p.x - 30 - w : p.x + 30));
+        const y = Math.max(8, Math.min(window.innerHeight - h - 8, p.y - h / 2));
+        const rot = Math.max(-7, Math.min(7, (p.x - lastX) * 0.5)); // se inclina un poco según la velocidad
+        lastX = p.x;
+        node.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot.toFixed(2)}deg)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [mounted, slug]);
+
+  const p = PROJECTS.find((x) => x.slug === last);
+  if (!mounted || !p) return null;
+  const m = PROJECT_MEDIA[p.slug];
+  return createPortal(
+    <div ref={el} className="pj-peek" data-on={slug ? '1' : '0'} aria-hidden="true" style={css({ '--pk-bg': p.bg, '--pk-ink': p.ink, '--pk-ac': p.accent })}>
+      <div className="pj-peek__card">
+        <div className="pj-peek__img"><img key={p.slug} src={m.cover.src} alt="" /></div>
+        <div className="pj-peek__cap">
+          <span className="label">( {p.n} )</span>
+          <b>{p.cliente}</b>
+          <span className="pj-peek__n label">{m.gallery.length + 1} piezas</span>
+        </div>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 export default function ProjectsList() {
   const [filter, setFilter] = useState(ALL);
   const [box, setBox] = useState<{ slug: string; i: number } | null>(null);
   const [peek, setPeek] = useState('');
-  const peekEl = useRef<HTMLDivElement>(null);
   const [opened, setOpened] = useState<string[]>([]);
+  /** 'out': saliendo, 'gone': oculto, 'in': entrando; sin valor: estable. */
+  const [phase, setPhase] = useState<Record<string, 'in' | 'out' | 'gone'>>({});
+  const gone = (p: Project) => phase[p.slug] === 'gone';
   const isOpen = (slug: string) => opened.includes(slug);
   const setOne = (slug: string, on: boolean) => setOpened((o) => (on ? (o.includes(slug) ? o : [...o, slug]) : o.filter((s) => s !== slug)));
   const collapseAndGo = (slug: string) => {
     setOne(slug, false);
+    say('collapse');
     document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   const show = (p: Project) => filter === ALL || p.servicios.includes(filter);
+
+  /** Filtra con animación: los que no corresponden se desvanecen y recién después se quitan; los que quedan entran escalonados. */
+  const applyFilter = (next: string) => {
+    if (next === filter) return;
+    const will = (p: Project) => next === ALL || p.servicios.includes(next);
+    setPhase((cur) => {
+      const upd = { ...cur };
+      PROJECTS.forEach((p) => {
+        if (cur[p.slug] !== 'gone' && !will(p)) upd[p.slug] = 'out';
+        else if (will(p)) upd[p.slug] = 'in';
+      });
+      return upd;
+    });
+    setFilter(next);
+    say(next === ALL ? 'filterAll' : 'filter');
+    window.setTimeout(() => setPhase((cur) => Object.fromEntries(Object.entries(cur).map(([k, v]) => [k, v === 'out' ? 'gone' : v])) as typeof cur), 380);
+    window.setTimeout(() => setPhase((cur) => Object.fromEntries(Object.entries(cur).filter(([, v]) => v !== 'in')) as typeof cur), 1500);
+  };
   const shown = PROJECTS.filter(show);
   const allOpen = shown.length > 0 && shown.every((p) => isOpen(p.slug));
+
+  useEffect(() => {
+    let t = 0;
+    let px = -1;
+    let py = -1;
+    const onMove = (e: PointerEvent) => { px = e.clientX; py = e.clientY; };
+    const onScroll = () => {
+      setPeek('');
+      window.clearTimeout(t);
+      t = window.setTimeout(() => {
+        const row = (document.elementFromPoint(px, py) as HTMLElement | null)?.closest<HTMLElement>('tr[data-slug]');
+        if (row?.dataset.slug) setPeek(row.dataset.slug);
+      }, 160);
+    };
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('scroll', onScroll); window.clearTimeout(t); };
+  }, []);
 
   // las piezas aparecen al llegar a la pantalla (también las de casos que se vuelven a mostrar al filtrar)
   useEffect(() => {
@@ -53,7 +165,7 @@ export default function ProjectsList() {
     return () => io.disconnect();
   }, [filter]);
 
-  const open = (p: Project, i: number) => setBox({ slug: p.slug, i });
+  const open = (p: Project, i: number) => { setBox({ slug: p.slug, i }); if (Math.random() < 0.5) say('zoom'); };
   const boxProject = box ? PROJECTS.find((p) => p.slug === box.slug) : null;
 
   return (
@@ -61,14 +173,15 @@ export default function ProjectsList() {
       <div className="wrap" style={{ paddingBottom: 'var(--space-7)' }}>
         <div className="filters label" role="group" aria-label="Filtrar por servicio">
           {[ALL, ...FILTERS].map((s) => (
-            <button key={s} className="chip label" aria-pressed={filter === s} onClick={() => setFilter(s)}>
+            <button key={s} className="chip label" aria-pressed={filter === s} onClick={() => applyFilter(s)}>
               {s}
             </button>
           ))}
+          <span key={shown.length} className="pj-count label" aria-live="polite">{shown.length} de {PROJECTS.length} proyectos</span>
           <button
             type="button"
             className="chip label pj-all"
-            onClick={() => setOpened(allOpen ? [] : shown.map((p) => p.slug))}
+            onClick={() => { setOpened(allOpen ? [] : shown.map((p) => p.slug)); say(allOpen ? 'collapseAll' : 'expandAll'); }}
           >
             {allOpen ? '− Recoger todos' : '+ Expandir todos'}
           </button>
@@ -84,12 +197,15 @@ export default function ProjectsList() {
               </tr>
             </thead>
             <tbody>
-              {shown.map((p) => (
+              {PROJECTS.map((p) => (
                 <tr
                   key={p.n}
-                  onMouseEnter={() => setPeek(PROJECT_MEDIA[p.slug].cover.src)}
+                  hidden={gone(p)}
+                  data-phase={phase[p.slug] || undefined}
+                  style={css({ '--k': Math.max(0, shown.indexOf(p)) })}
+                  data-slug={p.slug}
+                  onMouseEnter={() => setPeek(p.slug)}
                   onMouseLeave={() => setPeek('')}
-                  onMouseMove={(e) => { if (peekEl.current) peekEl.current.style.transform = `translate(${e.clientX + 24}px, ${e.clientY - 90}px)`; }}
                 >
                   <td className="label red"><a href={`#${p.slug}`} tabIndex={-1} aria-hidden="true">{p.n}</a></td>
                   <td><a className="pj-index__name" href={`#${p.slug}`} onClick={() => setOne(p.slug, true)}>{p.cliente}<span className="pj-index__arr" aria-hidden="true">↓</span></a></td>
@@ -100,26 +216,24 @@ export default function ProjectsList() {
             </tbody>
           </table>
         </div>
-        <div ref={peekEl} className="pj-peek" data-on={peek ? '1' : '0'} aria-hidden="true">
-          {peek && <img src={peek} alt="" />}
-        </div>
+        <Peek slug={peek} />
       </section>
 
       {PROJECTS.map((p) => {
         const m = PROJECT_MEDIA[p.slug];
         const { main, stories, offMain, offStories } = itemsOf(p);
-        const vars = css({ '--pj-bg': p.bg, '--pj-ink': p.ink, '--pj-accent': p.accent });
+        const vars = css({ '--pj-bg': p.bg, '--pj-ink': p.ink, '--pj-accent': p.accent, '--k': Math.max(0, shown.indexOf(p)) });
         const hasVideo = !!m.video;
         const nStory = stories.length + (hasVideo ? 1 : 0);
         const count = main.length + nStory;
         const on = isOpen(p.slug);
         return (
-          <section key={p.slug} id={p.slug} hidden={!show(p)} data-sec className="chapter pj" style={vars} aria-label={p.cliente}>
+          <section key={p.slug} id={p.slug} hidden={gone(p)} data-phase={phase[p.slug] || undefined} data-sec className="chapter pj" style={vars} aria-label={p.cliente}>
             <div className="wrap">
               <div className="pj__top">
                 <div className="pj__id">
                   <span className="label pj__n">( {p.n} ) <span>{p.rubro}</span>{p.anio ? <span>{p.anio}</span> : null}</span>
-                  <h2 className={`pj__name display${p.long ? ' pj__name--long' : ''}`}>
+                  <h2 className={`pj__name display${p.long ? ' pj__name--long' : ''}`} style={css({ '--len': longest(p.cliente) + 1 })}>
                     {p.cliente}<span className="pj__dot">.</span>
                   </h2>
                 </div>
@@ -141,7 +255,7 @@ export default function ProjectsList() {
                 className="pj__toggle"
                 aria-expanded={on}
                 aria-controls={`${p.slug}-more`}
-                onClick={() => setOne(p.slug, !on)}
+                onClick={() => { setOne(p.slug, !on); say(on ? 'collapse' : 'expand'); }}
               >
                 <span className="pj__toggle-t">{on ? 'Recoger proyecto' : 'Ver proyecto completo'}</span>
                 <span className="pj__toggle-n label">{count} piezas{p.palette ? ' + paleta' : ''}</span>

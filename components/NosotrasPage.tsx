@@ -81,7 +81,7 @@ export default function NosotrasPage() {
           <div className="wrap team-head">
             <span data-rv><SectionLabel>( 02 ) Quiénes somos</SectionLabel></span>
             <h2 className="display" data-rv style={{ ...rv(1), fontSize: 'clamp(44px,5.6vw,92px)', lineHeight: 0.92 }}>
-              Hecha por mujeres. <span className="kw">Argento‑colombianas.</span>
+              Hecha por mujeres. <span className="kw">Argento-colombianas.</span>
             </h2>
           </div>
           <div className="wrap" data-rv style={rv(2)}>

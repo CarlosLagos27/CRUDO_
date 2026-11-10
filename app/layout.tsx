@@ -10,7 +10,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], weight: '400', variable: 
 
 export const metadata: Metadata = {
   title: { default: 'Crudo_ — Tus ideas en su estado más crudo', template: '%s — Crudo_' },
-  description: 'Agencia creativa hecha por mujeres argento‑colombianas. Branding, naming, diseño, social media, audiovisual, ads e impresiones.',
+  description: 'Agencia creativa hecha por mujeres argento-colombianas. Branding, naming, diseño, social media, audiovisual, ads e impresiones.',
 };
 
 export const viewport: Viewport = { themeColor: '#A33B21' };

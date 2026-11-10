@@ -19,7 +19,7 @@ export default function StoryCard() {
       </button>
       <div className={`float-card__panel${open ? ' is-open' : ''}`} id="float-card-body">
         <div className="float-card__inner">
-          <p style={{ fontWeight: 500, fontSize: 16, lineHeight: 1.3 }}>Somos una agencia creativa hecha por mujeres argento‑colombianas.</p>
+          <p style={{ fontWeight: 500, fontSize: 16, lineHeight: 1.3 }}>Somos una agencia creativa hecha por mujeres argento-colombianas.</p>
           <p style={{ fontSize: 13, lineHeight: 1.4 }}>Branding, naming, diseño, social media, audiovisual, ads e impresiones.</p>
           <a href="#historia" style={{ fontSize: 14, fontWeight: 500, marginTop: 18 }}>Conocé la historia ↘</a>
         </div>

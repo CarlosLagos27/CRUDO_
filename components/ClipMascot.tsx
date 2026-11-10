@@ -13,6 +13,7 @@ const POSES: [string, Exclude<Pose, 'hide' | 'cheer'>][] = [
   ['.team-sec', 'team'],
   ['.band-red, .tiles', 'point'],
   ['footer', 'bye'],
+  ['@pj', 'hop'],
   ['.chapter:not(.develop-sec)', 'hop'],
 ];
 
@@ -34,7 +35,29 @@ const SAY: Record<string, string[]> = {
   angry: ['Ey, con calma.', 'Pará un poquito.', 'Mmm... ya, ya.', 'Con suavidad, che.'],
   calm: ['Bueno, ya pasó.', 'Estoy bien, estoy bien.'],
   wake: ['¡Ah! ¿Qué pasó?', 'No estaba dormida.', '¿Eh? Ya voy.'],
+  expand: ['¡Mirá cuánto hay para ver!', 'Acá viene lo bueno.', 'Desplegando el proyecto completo.'],
+  collapse: ['Listo, lo guardo.', 'Recogido. ¿Cuál sigue?'],
+  expandAll: ['¡Todo a la vista!', 'Uf, cuánto material.'],
+  collapseAll: ['A ordenar todo.', 'Todo guardadito.'],
+  filter: ['Buen filtro.', '¡A ver qué sale!', 'Ordenando los proyectos...'],
+  filterAll: ['Todos de vuelta.', 'Acá están todos.'],
+  zoom: ['¡Qué lindo se ve en grande!', 'Esa pieza quedó espectacular.', 'Los detalles importan.'],
   near: ['¿Me ves?', '¡Hola, hola!', 'Acá estoy.'],
+};
+
+/** Poses que se van alternando entre un proyecto y el siguiente. */
+const PJ_POSES: Exclude<Pose, 'hide' | 'cheer'>[] = ['hop', 'wave', 'team', 'read'];
+
+/** Mensajes sobre cada producto, para cuando esa sección está a la vista (clave: id del proyecto). */
+const SAY_PJ: Record<string, string[]> = {
+  piccolino: ['¡Qué salchicha más simpática!', 'Piccolino ladra con estilo.', 'Ese perrito corre por toda la marca.', '¿Viste el cartel de la calle?'],
+  'mart-bakery': ['Mart Bakery: se me hizo agua la boca.', 'Esos stickers de tortas son un amor.', 'Quiero uno de esos croissants.', 'Hasta el delantal quedó lindo.'],
+  miga: ['Miga tiene pan y mucho cariño.', 'La niña con pañuelo es toda una personalidad.', 'El letrero colgante quedó precioso.', 'Panadería colombiana, ¡qué rico!'],
+  'nube-skin': ['Nube Skin: tan suave como una nube.', 'Ese logo parece de perla.', 'Letras infladas en 3D, ¡qué lujo!', 'Cuidar la piel también es diseño.'],
+  archetype: ['Archetype: mucho concreto y rojo señal.', 'Berlín nos queda perfecta.', 'Esa A gigante es tremenda.', 'El video está en loop, ¡miralo!'],
+  malcriada: ['Esa torta de zanahoria me llama.', 'Luz de ventana y café con leche.', 'Malcriada sale muy bien en foto.', '¿Quién se anima a una porción?'],
+  'da-vinci': ['¡Un diente con el Hombre de Vitruvio!', 'Precisión y arte en un solo logo.', 'Da Vinci cuida las sonrisas.', 'Azul marino, muy elegante.'],
+  anma: ['ANMA: el verde lima se nota.', 'Minúsculas y mucho estilo.', 'Principal, secundario y marcas de agua.', 'Ese azul pizarra calma.'],
 };
 
 /** Gestos al azar mientras está quieta. */
@@ -61,6 +84,8 @@ export default function ClipMascot() {
   const clicks = useRef<number[]>([]);
   const lastSay = useRef('');
   const sayTimer = useRef(0);
+  const [grp, setGrp] = useState('');
+  const grpRef = useRef('');
   const angryTimer = useRef(0);
   const emoTimer = useRef(0);
 
@@ -77,10 +102,11 @@ export default function ClipMascot() {
 
   useEffect(() => { shownRef.current = shown; }, [shown]);
   useEffect(() => { sideRef.current = side; }, [side]);
+  useEffect(() => { grpRef.current = grp; }, [grp]);
 
   /** Dice una frase al azar del grupo (sin repetir la anterior) y la oculta a los ~4 s. */
-  const speak = useCallback((group: string) => {
-    const pool = SAY[group];
+  const speak = useCallback((group: string, slug?: string) => {
+    const pool = (slug && SAY_PJ[slug]) || SAY[group];
     if (!pool) return;
     let t = pool[Math.floor(Math.random() * pool.length)];
     if (pool.length > 1 && t === lastSay.current) t = pool[(pool.indexOf(t) + 1) % pool.length];
@@ -114,19 +140,24 @@ export default function ClipMascot() {
 
   // 1) pose según la sección más visible
   useEffect(() => {
-    const targets = POSES.flatMap(([sel, p]) => Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p })));
+    const pjTargets = Array.from(document.querySelectorAll<HTMLElement>('section.pj')).map((el, i) => ({ el, p: PJ_POSES[i % PJ_POSES.length], g: el.id }));
+    const targets = POSES.flatMap(([sel, p]) =>
+      sel === '@pj' ? pjTargets : Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p, g: '' })),
+    );
     if (!targets.length || !('IntersectionObserver' in window)) return;
     const ratio = new Map<Element, number>();
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => ratio.set(e.target, e.intersectionRatio));
         let best: Pose = 'hide';
+        let bestG = '';
         let top = 0.3;
-        targets.forEach(({ el, p }) => {
+        targets.forEach(({ el, p, g }) => {
           const r = ratio.get(el) ?? 0;
-          if (r > top) { top = r; best = p; }
+          if (r > top) { top = r; best = p; bestG = g; }
         });
         setTarget(best);
+        setGrp(bestG);
       },
       { threshold: [0, 0.15, 0.3, 0.45, 0.6, 0.8, 1] },
     );
@@ -156,9 +187,19 @@ export default function ClipMascot() {
     el.dataset.walk = '1';
     const w = window.setTimeout(() => { el.dataset.walk = '0'; }, 1000);
     let c = 0;
-    if (shown !== 'cheer' && Math.random() < 0.85) c = window.setTimeout(() => speakRef.current(shown), 1500);
+    if (shown !== 'cheer' && Math.random() < 0.85) c = window.setTimeout(() => speakRef.current(shown, grp || undefined), 1500);
     return () => { window.clearTimeout(w); window.clearTimeout(c); };
-  }, [shown]);
+  }, [shown, grp]);
+
+  // reacciona a lo que hace la persona en la lista de proyectos
+  useEffect(() => {
+    const onSay = (e: Event) => {
+      const d = (e as CustomEvent<{ group: string }>).detail;
+      if (d?.group && shownRef.current !== 'hide' && root.current?.dataset.sleep !== '1') speakRef.current(d.group);
+    };
+    window.addEventListener('clippy:say', onSay);
+    return () => window.removeEventListener('clippy:say', onSay);
+  }, []);
 
   // 4) cuando se revela la foto, asoma y celebra
   useEffect(() => {
@@ -284,7 +325,7 @@ export default function ClipMascot() {
     const loopChat = () => {
       chatTimer = window.setTimeout(() => {
         const s = shownRef.current;
-        if (s !== 'hide' && s !== 'cheer' && el.dataset.sleep !== '1') speakRef.current(s);
+        if (s !== 'hide' && s !== 'cheer' && el.dataset.sleep !== '1') speakRef.current(s, grpRef.current || undefined);
         loopChat();
       }, 20000 + Math.random() * 12000);
     };

@@ -94,11 +94,18 @@ ok('el video de Archetype se reproduce solo a la vista', playing);
 // filtro
 await p.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
 await p.getByRole('button', { name: 'Audiovisual', exact: true }).click();
-await p.waitForTimeout(400);
+await p.waitForTimeout(150);
+const leaving = await p.locator('section.pj[data-phase="out"]').count();
+ok('al filtrar, los casos salen con animación', leaving === 6, leaving + ' saliendo');
+await p.waitForTimeout(700);
 const visible = await p.evaluate(() => [...document.querySelectorAll('section.pj')].filter((s) => !s.hidden).map((s) => s.id));
 ok('filtro Audiovisual muestra Archetype y Malcriada', visible.sort().join() === 'archetype,malcriada', visible.join());
 await p.getByRole('button', { name: 'Todos', exact: true }).click();
-await p.waitForTimeout(300);
+await p.waitForTimeout(200);
+const entering = await p.locator('section.pj[data-phase="in"]').count();
+ok('al quitar el filtro, los casos entran con animación', entering === 8, entering + ' entrando');
+await p.waitForTimeout(1700);
+ok('las fases terminan (sin data-phase)', (await p.locator('[data-phase]').count()) === 0);
 // al volver a mostrar, los capítulos no quedan invisibles
 await p.evaluate(() => document.getElementById('anma').scrollIntoView({ block: 'start', behavior: 'instant' }));
 await p.waitForTimeout(1800);
