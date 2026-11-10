@@ -30,7 +30,7 @@ export default function Tienda() {
           </div>
         </section>
 
-        <section className="wrap" style={{ paddingBottom: 'var(--space-9)' }}>
+        <section className="mc-sec" style={{ paddingBottom: 'var(--space-8)' }}>
           <MailClub />
         </section>
 

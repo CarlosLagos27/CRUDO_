@@ -52,8 +52,8 @@ export const EDITIONS: Edition[] = [
     pieces: build('septiembre', [
       { id: 'libreta', label: 'Libreta bordó', note: 'Rosas en relieve sobre fondo bordó', x: 12, y: 42, w: 17, rot: -9, d: 14 },
       { id: 'sudoku', label: 'The Sudoku', note: 'Versión Crudo_, nivel 1', x: 88, y: 40, w: 17, rot: 8, d: 12 },
-      { id: 'carta', label: 'Carta de bienvenida', note: 'El tema del mes, escrito a mano', x: 20, y: 80, w: 25, rot: -6, d: 20 },
-      { id: 'receta', label: 'Receta: budín de limón', note: 'Con foto y preparación en el dorso', x: 80, y: 80, w: 25, rot: 7, d: 18 },
+      { id: 'carta', label: 'Carta de bienvenida', note: 'El tema del mes, escrito a mano', x: 20, y: 77, w: 25, rot: -6, d: 20 },
+      { id: 'receta', label: 'Receta: budín de limón', note: 'Con foto y preparación en el dorso', x: 80, y: 77, w: 25, rot: 7, d: 18 },
       { id: 'separador', label: 'Separador de libros', note: 'Para anotar libro, personaje y frase', x: 62, y: 23, w: 7, rot: 6, d: 10 },
       { id: 'lacre', label: 'Sticker de lacre', note: 'Una amapola en relieve', x: 50, y: 52, w: 10, rot: -12, d: 24 },
       { id: 'lirio', label: 'Sticker de lirio', note: 'Para decorar donde quieras', x: 11, y: 14, w: 13, rot: -24, d: 22 },
@@ -75,8 +75,8 @@ export const EDITIONS: Edition[] = [
     pieces: build('octubre', [
       { id: 'poster', label: 'Póster: El hijo del vampiro', note: 'Un cuento gótico para leer en voz baja', x: 12, y: 41, w: 18, rot: -8, d: 14 },
       { id: 'carta', label: 'Carta cifrada', note: 'Con la clave para descifrarla', x: 88, y: 40, w: 17, rot: 8, d: 12 },
-      { id: 'direccion', label: 'Sobre con dirección', note: 'Con estampilla y espacio para escribir', x: 20, y: 80, w: 27, rot: -6, d: 20 },
-      { id: 'papel-rojo', label: 'Papel texturado', note: 'Rojo sangre, para dibujar o escribir', x: 82, y: 80, w: 17, rot: 10, d: 18 },
+      { id: 'direccion', label: 'Sobre con dirección', note: 'Con estampilla y espacio para escribir', x: 20, y: 77, w: 27, rot: -6, d: 20 },
+      { id: 'papel-rojo', label: 'Papel texturado', note: 'Rojo sangre, para dibujar o escribir', x: 82, y: 77, w: 17, rot: 10, d: 18 },
       { id: 'separador', label: 'Separador gótico', note: 'Vitral con luna por un lado, ficha de lectura por el otro', x: 62, y: 23, w: 7, rot: 5, d: 10 },
       { id: 'calabaza', label: 'Sticker de calabaza', note: 'Trazo a mano, borde blanco', x: 36, y: 53, w: 11, rot: -14, d: 24 },
       { id: 'murcielago', label: 'Sticker de murciélago', note: 'Alas abiertas', x: 66, y: 52, w: 12, rot: 8, d: 22 },

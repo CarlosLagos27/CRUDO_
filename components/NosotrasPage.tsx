@@ -55,7 +55,7 @@ export default function NosotrasPage() {
         </section>
 
         <section id="historia" data-sec className="chapter chapter--yellow">
-          <div className="wrap cols">
+          <div className="wrap cols cols--center">
             <span data-rv><SectionLabel>( 01 ) Por qué Crudo</SectionLabel></span>
             <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: 32 }}>
               <p className="manifesto" data-rv style={rv(1)}>

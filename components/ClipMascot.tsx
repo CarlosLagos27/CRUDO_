@@ -14,7 +14,7 @@ const POSES: [string, Exclude<Pose, 'hide' | 'cheer'>][] = [
   ['.band-red, .tiles', 'point'],
   ['footer', 'bye'],
   ['@pj', 'hop'],
-  ['.mc-card', 'hop'],
+  ['@mc', 'wave'],
   ['.chapter:not(.develop-sec)', 'hop'],
 ];
 
@@ -64,6 +64,29 @@ const SAY_PJ: Record<string, string[]> = {
   anma: ['ANMA: el verde lima se nota.', 'Minúsculas y mucho estilo.', 'Principal, secundario y marcas de agua.', 'Ese azul pizarra calma.'],
 };
 
+/** Mensajes del Mail Club: por edición (clave "mc-<edición>") y por pieza (clave "<edición>:<pieza>"). */
+const SAY_MC: Record<string, string[]> = {
+  'mc-septiembre': ['Septiembre: todo es rojo.', 'Pasión, amor y fuerza en un sobre.', 'La primera edición, ¡qué emoción!', 'Ese lacre con amapola es precioso.'],
+  'mc-octubre': ['Octubre se pone misterioso.', '¿Podrás descifrar la carta?', 'Cuervos, castillos y murciélagos.', 'Leelo con luz tenue.'],
+  'septiembre:libreta': ['Rosas en relieve, ¡qué elegancia!', 'Una libreta bordó para anotar de todo.'],
+  'septiembre:sudoku': ['The Sudoku: nivel 1, a pensar un rato.', 'Lápiz en mano, que arranca el nivel 1.'],
+  'septiembre:carta': ['La carta explica el tema del mes.', 'Rojo: pasión, amor y fuerza.'],
+  'septiembre:receta': ['Un budín de limón: ¿quién lo prueba?', 'Receta con foto y paso a paso.'],
+  'septiembre:separador': ['Anotá libro, personaje y frase favorita.', 'Un separador que además se completa.'],
+  'septiembre:lacre': ['Una amapola en lacre. ¡Divina!', 'Ese sello late como un corazón.'],
+  'septiembre:lirio': ['Un lirio para decorar donde quieras.', 'Hasta las flores se pegan.'],
+  'septiembre:corazon': ['Corazón de encaje: puro cariño.', 'Con mensaje en el centro.'],
+  'octubre:poster': ['Un cuento de vampiros, ¡qué escalofrío!', 'El hijo del vampiro, para leer en voz baja.'],
+  'octubre:carta': ['Descifrala con la clave de abajo.', 'Cada símbolo es una letra.'],
+  'octubre:direccion': ['Con estampilla y todo.', 'Un sobre listo para enviar misterios.'],
+  'octubre:papel-rojo': ['Rojo sangre, ideal para dibujar.', 'Un papel con mucha textura.'],
+  'octubre:separador': ['Un vitral con luna, ¡qué elegante!', 'Por detrás, tu ficha de lectura.'],
+  'octubre:calabaza': ['Esa calabaza no sonríe.', 'Trazo a mano y borde blanco.'],
+  'octubre:murcielago': ['¡Cuidado, que vuela!', 'Alas abiertas, listo para pegar.'],
+  'octubre:castillo': ['¿Quién vivirá ahí?', 'Torres góticas en sticker.'],
+  'octubre:cuervo': ['Dicen que trae mensajes.', 'El mensajero de la noche.'],
+};
+
 /** Gestos al azar mientras está quieta. */
 const IDLE = ['look', 'lean', 'hop', 'peek'] as const;
 
@@ -110,7 +133,7 @@ export default function ClipMascot() {
 
   /** Dice una frase al azar del grupo (sin repetir la anterior) y la oculta a los ~4 s. */
   const speak = useCallback((group: string, slug?: string) => {
-    const pool = (slug && SAY_PJ[slug]) || SAY[group];
+    const pool = (slug && (SAY_PJ[slug] || SAY_MC[slug])) || SAY[group];
     if (!pool) return;
     let t = pool[Math.floor(Math.random() * pool.length)];
     if (pool.length > 1 && t === lastSay.current) t = pool[(pool.indexOf(t) + 1) % pool.length];
@@ -145,8 +168,9 @@ export default function ClipMascot() {
   // 1) pose según la sección más visible
   useEffect(() => {
     const pjTargets = Array.from(document.querySelectorAll<HTMLElement>('section.pj')).map((el, i) => ({ el, p: PJ_POSES[i % PJ_POSES.length], g: el.id }));
+    const mcTargets = Array.from(document.querySelectorAll<HTMLElement>('.mc-card')).map((el, i) => ({ el, p: (i % 2 ? 'hop' : 'wave') as Exclude<Pose, 'hide' | 'cheer'>, g: `mc-${el.dataset.edition}` }));
     const targets = POSES.flatMap(([sel, p]) =>
-      sel === '@pj' ? pjTargets : Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p, g: '' })),
+      sel === '@pj' ? pjTargets : sel === '@mc' ? mcTargets : Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p, g: '' })),
     );
     if (!targets.length || !('IntersectionObserver' in window)) return;
     const ratio = new Map<Element, number>();
@@ -198,8 +222,8 @@ export default function ClipMascot() {
   // reacciona a lo que hace la persona en la lista de proyectos
   useEffect(() => {
     const onSay = (e: Event) => {
-      const d = (e as CustomEvent<{ group: string }>).detail;
-      if (d?.group && shownRef.current !== 'hide' && root.current?.dataset.sleep !== '1') speakRef.current(d.group);
+      const d = (e as CustomEvent<{ group: string; slug?: string }>).detail;
+      if (d?.group && shownRef.current !== 'hide' && root.current?.dataset.sleep !== '1') speakRef.current(d.group, d.slug);
     };
     window.addEventListener('clippy:say', onSay);
     return () => window.removeEventListener('clippy:say', onSay);
