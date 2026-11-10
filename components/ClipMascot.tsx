@@ -55,6 +55,7 @@ export default function ClipMascot() {
   const [say, setSay] = useState({ text: '', on: false });
   const [poked, setPoked] = useState(false);
   const root = useRef<HTMLDivElement>(null);
+  const sayW = useRef<HTMLDivElement>(null);
   const shownRef = useRef<Pose>('hide');
   const sideRef = useRef<Side>('right');
   const clicks = useRef<number[]>([]);
@@ -90,6 +91,26 @@ export default function ClipMascot() {
   }, []);
   const speakRef = useRef(speak);
   useEffect(() => { speakRef.current = speak; }, [speak]);
+
+  // globo horizontal: invierte la parte lineal (giro y escala) de la cadena .mascot > .mascot__t > .mascot__b
+  useEffect(() => {
+    const el = root.current;
+    const w = sayW.current;
+    if (!el || !w || !say.on) return;
+    const t = el.querySelector('.mascot__t');
+    const b = el.querySelector('.mascot__b');
+    if (!t || !b) return;
+    const lin = (n: Element) => { const m = new DOMMatrixReadOnly(getComputedStyle(n).transform); return new DOMMatrix([m.a, m.b, m.c, m.d, 0, 0]); };
+    let raf = 0;
+    const tick = () => {
+      const rot = parseFloat(getComputedStyle(el).rotate) || 0; // la caminata anima la propiedad `rotate` del contenedor
+      const inv = new DOMMatrix().rotate(rot).multiply(lin(t)).multiply(lin(b)).inverse();
+      w.style.transform = `matrix(${inv.a}, ${inv.b}, ${inv.c}, ${inv.d}, 0, 0)`;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => { cancelAnimationFrame(raf); w.style.transform = ''; };
+  }, [say.on]);
 
   // 1) pose según la sección más visible
   useEffect(() => {
@@ -328,7 +349,10 @@ export default function ClipMascot() {
     <div ref={root} className="mascot" data-pose={shown} data-side={side} data-tone="light" aria-hidden="true">
       <div className="mascot__t">
         <div className={`mascot__b${poked ? ' is-poked' : ''}`} onClick={poke}>
-          <div className="mascot__say" data-on={say.on ? '1' : '0'}>{say.text}</div>
+          {/* el globo sigue a Clippy (sube, baja, se balancea con ella) pero se mantiene horizontal: el contenedor cancela su giro */}
+          <div className="mascot__sayw" ref={sayW}>
+            <div className="mascot__say" data-on={say.on ? '1' : '0'}>{say.text}</div>
+          </div>
           <span className="emo emo--vein" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M4 10Q10 10 10 4M14 4Q14 10 20 10M20 14Q14 14 14 20M10 20Q10 14 4 14" /></svg>
           </span>
