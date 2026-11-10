@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Archivo, Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import RevealInit from '@/components/RevealInit';
+import ClipMascot from '@/components/ClipMascot';
 import './globals.css';
 
 const archivo = Archivo({ subsets: ['latin'], weight: ['400', '500', '800', '900'], style: ['normal', 'italic'], variable: '--font-archivo' });
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <RevealInit />
+        <ClipMascot />
       </body>
     </html>
   );
