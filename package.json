@@ -9,7 +9,9 @@
     "dev": "next dev",
     "build": "next build",
     "test:reveal": "node scripts/test-reveal.mjs",
-    "test:team": "node scripts/test-team.mjs"
+    "test:team": "node scripts/test-team.mjs",
+    "build:projects": "node scripts/build-projects.mjs",
+    "test:proyectos": "node scripts/test-proyectos.mjs"
   },
   "dependencies": {
     "@types/node": "^26.6.6",

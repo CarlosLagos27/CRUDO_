@@ -1,0 +1,703 @@
+{
+  "piccolino": {
+    "name": "Piccolino",
+    "gallery": [
+      {
+        "src": "/proyectos/piccolino/01.webp",
+        "w": 1500,
+        "h": 1500,
+        "alt": "Ilustración del perro salchicha de Piccolino corriendo"
+      },
+      {
+        "src": "/proyectos/piccolino/02.webp",
+        "w": 1092,
+        "h": 839,
+        "alt": "Marca Piccolino en verde sobre fondo amarillo"
+      },
+      {
+        "src": "/proyectos/piccolino/03.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Cartel de calle con la marca Piccolino"
+      },
+      {
+        "src": "/proyectos/piccolino/04.webp",
+        "w": 1500,
+        "h": 1125,
+        "alt": "Cartel Piccolino sobre el pavimento"
+      },
+      {
+        "src": "/proyectos/piccolino/05.webp",
+        "w": 1200,
+        "h": 1500,
+        "alt": "Camiseta y hoodie Piccolino sobre el pasto"
+      },
+      {
+        "src": "/proyectos/piccolino/06.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Camiseta y hoodie sobre fondo azul con forma de nube"
+      },
+      {
+        "src": "/proyectos/piccolino/07.webp",
+        "w": 1500,
+        "h": 1001,
+        "alt": "Cintas de embalaje con la marca Piccolino"
+      },
+      {
+        "src": "/proyectos/piccolino/08.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Cintas Piccolino sobre ilustración en naranja"
+      },
+      {
+        "src": "/proyectos/piccolino/09.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Persona con perros frente al nombre Piccolino"
+      },
+      {
+        "src": "/proyectos/piccolino/10.webp",
+        "w": 1081,
+        "h": 1350,
+        "alt": "Caniche probando un vasito amarillo de Piccolino"
+      },
+      {
+        "src": "/proyectos/piccolino/11.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Collage de fotos de perros con la marca Piccolino"
+      },
+      {
+        "src": "/proyectos/piccolino/12.webp",
+        "w": 845,
+        "h": 1500,
+        "alt": "Historia de Instagram con dálmata",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/piccolino/13.webp",
+        "w": 845,
+        "h": 1500,
+        "alt": "Historia de Instagram con perro con pañuelo rosa",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/piccolino/14.webp",
+        "w": 845,
+        "h": 1500,
+        "alt": "Historia de Instagram con perro salchicha",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/piccolino/15.webp",
+        "w": 845,
+        "h": 1500,
+        "alt": "Historia de Instagram con perro pastor",
+        "group": "stories"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/piccolino/cover.webp",
+      "w": 2000,
+      "h": 1333,
+      "alt": "Integrante con camiseta Piccolino, acostada sobre fondo blanco"
+    }
+  },
+  "mart-bakery": {
+    "name": "Mart Bakery",
+    "gallery": [
+      {
+        "src": "/proyectos/mart-bakery/01.webp",
+        "w": 1098,
+        "h": 1370,
+        "alt": "Logo Mart Bakery en azul claro sobre chocolate"
+      },
+      {
+        "src": "/proyectos/mart-bakery/02.webp",
+        "w": 1098,
+        "h": 1369,
+        "alt": "Logo Mart Bakery en crema sobre bordó"
+      },
+      {
+        "src": "/proyectos/mart-bakery/03.webp",
+        "w": 1200,
+        "h": 1500,
+        "alt": "Bandeja de medialunas con tarjeta Mart"
+      },
+      {
+        "src": "/proyectos/mart-bakery/04.webp",
+        "w": 1500,
+        "h": 1120,
+        "alt": "Delantal con el logo de Mart Bakery"
+      },
+      {
+        "src": "/proyectos/mart-bakery/05.webp",
+        "w": 1125,
+        "h": 1500,
+        "alt": "Toldo azul con el logo de Mart Bakery"
+      },
+      {
+        "src": "/proyectos/mart-bakery/06.webp",
+        "w": 1001,
+        "h": 1500,
+        "alt": "Panadero con remera de Mart Bakery"
+      },
+      {
+        "src": "/proyectos/mart-bakery/07.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Tortas con stickers ilustrados de Mart"
+      },
+      {
+        "src": "/proyectos/mart-bakery/08.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Bandeja de masas con stickers de Mart"
+      },
+      {
+        "src": "/proyectos/mart-bakery/09.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Porciones de torta en cajas triangulares de Mart"
+      },
+      {
+        "src": "/proyectos/mart-bakery/10.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Café para llevar con vaso de Mart sobre la vereda"
+      },
+      {
+        "src": "/proyectos/mart-bakery/11.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Porción de torta sobre mantel con el logo Mart"
+      },
+      {
+        "src": "/proyectos/mart-bakery/12.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Dos personas llevando cajas de Mart Bakery"
+      },
+      {
+        "src": "/proyectos/mart-bakery/13.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Cajas amarillas de Mart Bakery con un bollo encima"
+      },
+      {
+        "src": "/proyectos/mart-bakery/14.webp",
+        "w": 1411,
+        "h": 1500,
+        "alt": "Set de stickers ilustrados de tortas"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/mart-bakery/cover.webp",
+      "w": 2000,
+      "h": 1335,
+      "alt": "Vaso de Mart Bakery con postre de chocolate sobre una mesa de madera"
+    }
+  },
+  "miga": {
+    "name": "Miga",
+    "gallery": [
+      {
+        "src": "/proyectos/miga/01.webp",
+        "w": 1080,
+        "h": 1450,
+        "alt": "Afiche de Miga con modelo mordiendo un pan"
+      },
+      {
+        "src": "/proyectos/miga/02.webp",
+        "w": 1080,
+        "h": 1450,
+        "alt": "Entrada de Miga con toldo y letrero"
+      },
+      {
+        "src": "/proyectos/miga/03.webp",
+        "w": 1080,
+        "h": 1450,
+        "alt": "Letrero colgante de Miga"
+      },
+      {
+        "src": "/proyectos/miga/04.webp",
+        "w": 1080,
+        "h": 1450,
+        "alt": "Persona comiendo pan frente al local de Miga"
+      },
+      {
+        "src": "/proyectos/miga/05.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Vidriera de Miga con el isotipo"
+      },
+      {
+        "src": "/proyectos/miga/06.webp",
+        "w": 1090,
+        "h": 1083,
+        "alt": "Isotipo de Miga: una niña con pañuelo"
+      },
+      {
+        "src": "/proyectos/miga/07.webp",
+        "w": 487,
+        "h": 518,
+        "alt": "Isotipo de Miga con contorno crema"
+      },
+      {
+        "src": "/proyectos/miga/08.webp",
+        "w": 1495,
+        "h": 1500,
+        "alt": "Marca de Miga en composición circular"
+      },
+      {
+        "src": "/proyectos/miga/09.webp",
+        "w": 1080,
+        "h": 1450,
+        "alt": "Lista de precios de Miga sobre masa de croissant"
+      },
+      {
+        "src": "/proyectos/miga/10.webp",
+        "w": 1000,
+        "h": 1500,
+        "alt": "Lista de precios de Miga"
+      },
+      {
+        "src": "/proyectos/miga/11.webp",
+        "w": 1500,
+        "h": 1000,
+        "alt": "Letrero colgante de Miga sobre una fachada"
+      },
+      {
+        "src": "/proyectos/miga/12.webp",
+        "w": 1500,
+        "h": 1000,
+        "alt": "Fachada de Miga con persianas verdes"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/miga/cover.webp",
+      "w": 2000,
+      "h": 1333,
+      "alt": "Fachada de Miga Panadería Colombiana con la marca en la vidriera"
+    }
+  },
+  "nube-skin": {
+    "name": "Nube Skin",
+    "gallery": [
+      {
+        "src": "/proyectos/nube-skin/01.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma NS en 3D sobre azul"
+      },
+      {
+        "src": "/proyectos/nube-skin/02.webp",
+        "w": 1080,
+        "h": 1080,
+        "alt": "Logo Nube Skin en 3D perlado sobre azul"
+      },
+      {
+        "src": "/proyectos/nube-skin/03.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Estrella perlada de la marca"
+      },
+      {
+        "src": "/proyectos/nube-skin/04.webp",
+        "w": 1080,
+        "h": 1080,
+        "alt": "Monograma NS en perla"
+      },
+      {
+        "src": "/proyectos/nube-skin/05.webp",
+        "w": 1500,
+        "h": 1125,
+        "alt": "Sticker redondo con el logo Nube Skin"
+      },
+      {
+        "src": "/proyectos/nube-skin/06.webp",
+        "w": 1500,
+        "h": 1125,
+        "alt": "Sticker redondo con el monograma NS"
+      },
+      {
+        "src": "/proyectos/nube-skin/07.webp",
+        "w": 820,
+        "h": 1500,
+        "alt": "Moodboard de Nube Skin"
+      },
+      {
+        "src": "/proyectos/nube-skin/08.webp",
+        "w": 1200,
+        "h": 1500,
+        "alt": "Persona en la bañera con el logo Nube Skin"
+      },
+      {
+        "src": "/proyectos/nube-skin/09.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Rostro con mascarilla y pincel, para el lanzamiento"
+      },
+      {
+        "src": "/proyectos/nube-skin/10.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Piel con gotas de agua y el logo Nube Skin"
+      },
+      {
+        "src": "/proyectos/nube-skin/11.webp",
+        "w": 1207,
+        "h": 1500,
+        "alt": "Hombro mojado con el logo Nube Skin"
+      },
+      {
+        "src": "/proyectos/nube-skin/12.webp",
+        "w": 1080,
+        "h": 1350,
+        "alt": "Pieza \"coming soon\" para redes"
+      },
+      {
+        "src": "/proyectos/nube-skin/13.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Pieza de redes: ¿cómo comprar?"
+      },
+      {
+        "src": "/proyectos/nube-skin/14.webp",
+        "w": 1080,
+        "h": 1080,
+        "alt": "Pieza de redes: newbies"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/nube-skin/cover.webp",
+      "w": 1200,
+      "h": 1200,
+      "alt": "Logo Nube Skin sobre un cielo con nubes"
+    }
+  },
+  "archetype": {
+    "name": "Archetype",
+    "gallery": [
+      {
+        "src": "/proyectos/archetype/01.webp",
+        "w": 714,
+        "h": 477,
+        "alt": "Logo Archetype en negro"
+      },
+      {
+        "src": "/proyectos/archetype/02.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Tarjetas de Archetype sobre fotografía de arquitectura"
+      },
+      {
+        "src": "/proyectos/archetype/03.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Afiche de Archetype con plástico arrugado"
+      },
+      {
+        "src": "/proyectos/archetype/04.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Collage de un edificio con la marca Archetype"
+      },
+      {
+        "src": "/proyectos/archetype/05.webp",
+        "w": 1082,
+        "h": 1450,
+        "alt": "Afiche con arquitectura curva y el logo Archetype"
+      },
+      {
+        "src": "/proyectos/archetype/06.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Afiche con figura bajo un edificio"
+      },
+      {
+        "src": "/proyectos/archetype/07.webp",
+        "w": 1081,
+        "h": 1450,
+        "alt": "Silueta de edificio blanca sobre fotografía en blanco y negro"
+      },
+      {
+        "src": "/proyectos/archetype/08.webp",
+        "w": 1500,
+        "h": 1001,
+        "alt": "Afiche de Archetype con plástico sobre fondo claro"
+      },
+      {
+        "src": "/proyectos/archetype/09.webp",
+        "w": 302,
+        "h": 418,
+        "alt": "Letra A de la marca Archetype"
+      },
+      {
+        "src": "/proyectos/archetype/10.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram sobre interior de piedra",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/archetype/11.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram sobre una mesa de dibujo",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/archetype/12.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram con retrato de persona de negro",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/archetype/13.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram sobre concreto",
+        "group": "stories"
+      },
+      {
+        "src": "/proyectos/archetype/14.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram sobre un café de diseño",
+        "group": "stories"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/archetype/cover.webp",
+      "w": 2000,
+      "h": 1333,
+      "alt": "Tarjetas rojas de Archetype dispersas sobre fondo claro"
+    },
+    "video": {
+      "src": "/proyectos/archetype/secuencia.mp4"
+    }
+  },
+  "malcriada": {
+    "name": "Malcriada",
+    "gallery": [
+      {
+        "src": "/proyectos/malcriada/01.webp",
+        "w": 1200,
+        "h": 1500,
+        "alt": "Mesa de mármol con torta, bebida y rol de canela"
+      },
+      {
+        "src": "/proyectos/malcriada/02.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Primer plano de la torta de zanahoria"
+      },
+      {
+        "src": "/proyectos/malcriada/03.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Rol de canela y café con leche junto al cartel de neón"
+      },
+      {
+        "src": "/proyectos/malcriada/04.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Torta de zanahoria con bebida roja frente a la ventana"
+      },
+      {
+        "src": "/proyectos/malcriada/05.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Porción de torta de zanahoria con naranja deshidratada"
+      },
+      {
+        "src": "/proyectos/malcriada/06.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Bebida roja con rodaja de naranja"
+      },
+      {
+        "src": "/proyectos/malcriada/07.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Café con leche y bebida con naranja"
+      },
+      {
+        "src": "/proyectos/malcriada/08.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Pared del local con ilustración y frase"
+      },
+      {
+        "src": "/proyectos/malcriada/09.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Torta de zanahoria de frente"
+      },
+      {
+        "src": "/proyectos/malcriada/10.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Persona sonriendo junto a la ventana con su torta"
+      },
+      {
+        "src": "/proyectos/malcriada/11.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Persona en el local con torta y bebida"
+      },
+      {
+        "src": "/proyectos/malcriada/12.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Persona disfrutando de la torta con un café helado"
+      },
+      {
+        "src": "/proyectos/malcriada/13.webp",
+        "w": 1200,
+        "h": 1500,
+        "alt": "Mesa de mármol vista desde arriba"
+      },
+      {
+        "src": "/proyectos/malcriada/14.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Torta de zanahoria sobre la barra"
+      },
+      {
+        "src": "/proyectos/malcriada/15.webp",
+        "w": 1500,
+        "h": 844,
+        "alt": "Mesa del local con pared pintada",
+        "group": "wide"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/malcriada/cover.webp",
+      "w": 2000,
+      "h": 1125,
+      "alt": "Porción de torta de zanahoria sobre una mesa de madera junto a la ventana"
+    }
+  },
+  "da-vinci": {
+    "name": "Clínica Dental Da Vinci",
+    "gallery": [
+      {
+        "src": "/proyectos/da-vinci/01.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Logo horizontal de Clínica Dental Da Vinci en azul"
+      },
+      {
+        "src": "/proyectos/da-vinci/02.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Isotipo: un diente con el hombre de Vitruvio"
+      },
+      {
+        "src": "/proyectos/da-vinci/03.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Tipografía de la marca Clínica Dental Da Vinci"
+      },
+      {
+        "src": "/proyectos/da-vinci/04.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Tipografía de la marca en blanco sobre azul"
+      },
+      {
+        "src": "/proyectos/da-vinci/05.webp",
+        "w": 1080,
+        "h": 1081,
+        "alt": "Isotipo en blanco sobre azul marino"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/da-vinci/cover.webp",
+      "w": 1080,
+      "h": 1080,
+      "alt": "Logo de Clínica Dental Da Vinci en blanco sobre azul marino"
+    }
+  },
+  "anma": {
+    "name": "ANMA Beauty",
+    "gallery": [
+      {
+        "src": "/proyectos/anma/01.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Logo ANMA Beauty en azul sobre lima"
+      },
+      {
+        "src": "/proyectos/anma/02.webp",
+        "w": 1081,
+        "h": 1080,
+        "alt": "Logo ANMA Beauty en azul sobre celeste"
+      },
+      {
+        "src": "/proyectos/anma/03.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Logo ANMA Beauty en celeste sobre azul"
+      },
+      {
+        "src": "/proyectos/anma/04.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Logo ANMA Beauty en crema sobre azul"
+      },
+      {
+        "src": "/proyectos/anma/05.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Logo ANMA Beauty en azul sobre crema"
+      },
+      {
+        "src": "/proyectos/anma/06.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma anma en azul sobre lima"
+      },
+      {
+        "src": "/proyectos/anma/07.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma anma en lima sobre azul"
+      },
+      {
+        "src": "/proyectos/anma/08.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma anma en blanco sobre azul"
+      },
+      {
+        "src": "/proyectos/anma/09.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma anma en azul sobre crema"
+      },
+      {
+        "src": "/proyectos/anma/10.webp",
+        "w": 1081,
+        "h": 1080,
+        "alt": "Monograma anma en azul sobre celeste"
+      },
+      {
+        "src": "/proyectos/anma/11.webp",
+        "w": 1081,
+        "h": 1081,
+        "alt": "Monograma anma en crema sobre azul"
+      }
+    ],
+    "cover": {
+      "src": "/proyectos/anma/cover.webp",
+      "w": 1081,
+      "h": 1081,
+      "alt": "Logo ANMA Beauty en verde lima sobre azul pizarra"
+    }
+  }
+}

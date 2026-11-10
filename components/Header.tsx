@@ -28,7 +28,7 @@ export default function Header() {
     const sample = () => {
       raf = 0;
       const h = el.offsetHeight;
-      const stack = document.elementsFromPoint(4, h + 2);
+      const stack = document.elementsFromPoint(64, h + 2);
       let rgb: number[] | null = null;
       for (let n: Element | null = stack[0] ?? null; n && !rgb; n = n.parentElement) {
         const bg = getComputedStyle(n).backgroundColor;
@@ -48,9 +48,11 @@ export default function Header() {
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(sample); };
     sample();
+    // las secciones se revelan con una animación: vuelve a leer el fondo cada medio segundo
+    const poll = window.setInterval(sample, 500);
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
+    return () => { window.clearInterval(poll); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); cancelAnimationFrame(raf); };
   }, [path]);
 
   return (

@@ -14,7 +14,7 @@ export default function Proyectos() {
         <section className="wrap page-hero">
           <h1 className="display">Proyectos<span className="dot">.</span></h1>
           <p className="lead" style={{ marginTop: 'var(--space-4)' }}>
-            [Bajada: seis casos que salieron de una idea en crudo.]
+            Ocho casos que salieron de una idea en crudo: marcas, fotos y piezas que hoy se ven, se tocan y se comen.
           </p>
         </section>
         <ProjectsList />
