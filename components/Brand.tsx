@@ -9,11 +9,24 @@ export function Clip({ size = 22, color = 'currentColor', stroke = 2.4 }: { size
   );
 }
 
+/** Texto que se escribe letra por letra (solo CSS): cada letra aparece con un retardo escalonado. */
+export function Typed({ text }: { text: string }) {
+  return (
+    <>
+      {Array.from(text).map((ch, i) => (
+        <i key={i} className="tw" style={{ ['--k' as string]: i } as React.CSSProperties} aria-hidden="true">
+          {ch}
+        </i>
+      ))}
+    </>
+  );
+}
+
 /** Wordmark: Crudo + guion bajo como barra. */
 export function Wordmark({ barColor }: { barColor?: string }) {
   return (
     <span className="wm">
-      Crudo<i className="wm__bar" style={barColor ? { background: barColor } : undefined} />
+      <Typed text="Crudo" /><i className="wm__bar caret" style={barColor ? { background: barColor } : undefined} />
     </span>
   );
 }

@@ -1,3 +1,5 @@
+import ClipEyes from '@/components/ClipEyes';
+
 type Props = { src: string; alt: string; pos?: string; head: React.ReactNode };
 
 const N = 30;
@@ -41,6 +43,7 @@ export default function Develop({ src, alt, pos = 'center', head }: Props) {
     <div className="rev">
       {head}
       <div className="wrap rev__stage">
+        <ClipEyes />
         <input id="rev-toggle" className="rev__in sr-only" type="checkbox" />
 
         <div className="rev__frame">
@@ -59,6 +62,10 @@ export default function Develop({ src, alt, pos = 'center', head }: Props) {
             <span className="clip" aria-hidden="true">
               <svg viewBox="0 0 56 150" focusable="false">
                 <path pathLength="1" d="M3 37V122A25 25 0 0 0 53 122V25A18 18 0 0 0 17 25V100A11 11 0 0 0 39 100V58" />
+                <g className="eyes">
+                  <g className="eye"><circle className="eye__w" cx="15" cy="52" r="7.2" /><circle className="eye__p" cx="15" cy="52" r="2.9" /></g>
+                  <g className="eye"><circle className="eye__w" cx="39" cy="52" r="7.2" /><circle className="eye__p" cx="39" cy="52" r="2.9" /></g>
+                </g>
               </svg>
             </span>
           </label>

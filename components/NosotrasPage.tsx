@@ -26,7 +26,7 @@ export default function NosotrasPage() {
           <h1 className="display">
             {lines.map(([t, pl], i) => (
               <span key={t} className="ln" style={{ paddingLeft: pl }}>
-                <span style={rv(i)}>{t}</span>
+                <span style={rv(i)}>{t.endsWith("_") ? <>{t.slice(0, -1)}<i className="caret-bar caret" aria-hidden="true" /></> : t}</span>
               </span>
             ))}
           </h1>

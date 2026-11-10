@@ -18,7 +18,7 @@ export default function Inicio() {
           <h1 className="display">
             <span className="ln"><span style={rv(0)}>Tus ideas</span></span>
             <span className="ln"><span style={rv(1)} className="paren"><ParenPhoto k="resultado" red /></span></span>
-            <span className="ln"><span style={rv(2)}>en crudo<span className="dot">_</span></span></span>
+            <span className="ln"><span style={rv(2)}>en crudo<span className="dot caret">_</span></span></span>
           </h1>
           <div className="hero-home__meta">
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>

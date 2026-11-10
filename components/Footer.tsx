@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Typed } from '@/components/Brand';
 import { INSTAGRAM, MAIL, NAV, TIKTOK } from '@/lib/data';
 
 export default function Footer({ dark = false }: { dark?: boolean }) {
@@ -18,7 +19,7 @@ export default function Footer({ dark = false }: { dark?: boolean }) {
           </div>
         </div>
         <div className="footer__word" aria-hidden="true">
-          Crudo<span>_</span>
+          <Typed text="Crudo" /><span className="caret">_</span>
         </div>
       </div>
     </footer>
