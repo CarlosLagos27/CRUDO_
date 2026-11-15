@@ -21,11 +21,20 @@ export const SERVICES = [
   'Impresiones',
 ];
 
-export const PACKS = [
-  { name: '[NOMBRE PACK]', desc: '[Detalle de qué incluye]', price: '[PRECIO]' },
-  { name: '[NOMBRE PACK]', desc: '[Detalle de qué incluye]', price: '[PRECIO]' },
-  { name: '[NOMBRE PACK]', desc: '[Detalle de qué incluye]', price: '[PRECIO]' },
-  { name: 'Personalizado', desc: '[Detalle de qué incluye]', price: '[PRECIO]', red: true },
+export const PACKS_NOTE = 'Cada proyecto es único, y su precio también. Escribinos y te pasamos tu presupuesto.';
+
+export const PACKS: { name: string; desc: string; items?: string[]; red?: boolean }[] = [
+  { name: 'Redes Sociales', desc: 'Tu marca, viva todos los días.', items: ['Estrategia de contenido', 'Creación de contenido', 'Community Management', 'Ads', 'Calendario mensual'] },
+  { name: 'Diseño Gráfico', desc: 'De la idea en crudo a una identidad.', items: ['Branding y rebranding', 'Packaging', 'Señalética', 'Merch', 'Piezas gráficas', 'Impresiones de pequeña y gran escala'] },
+  { name: 'Audiovisual', desc: 'Lo que tu marca tiene para contar, en movimiento.', items: ['Dirección creativa y de arte', 'Video', 'Fotografía', 'Edición de video e imagen', 'Cobertura de eventos'] },
+  { name: 'A medida', desc: 'Armamos el pack con lo que necesites. Combiná servicios de las tres áreas o contanos tu proyecto puntual.', red: true },
+];
+
+/** Productos digitales de la tienda (ebooks). Fotos en /public/tienda, con el mismo rojo de fondo de la sección. */
+export const DIGITALES = [
+  { name: 'Guía CM desde casa + Planner mensual', old: '$60.000', price: '$30.000', off: '50% OFF', img: '/tienda/combo-community-manager.webp', alt: 'Los dos libros juntos con un sello que dice: lleva los dos por $30.000' },
+  { name: 'Planner mensual para Community Managers', old: '$25.000', price: '$19.990', off: '20% OFF', img: '/tienda/planner-community-managers.webp', alt: 'Libro Planner mensual para Community Managers, by Crudo_' },
+  { name: 'Guía del Community Manager desde casa', old: '$45.000', price: '$39.990', off: '11% OFF', img: '/tienda/guia-community-manager.webp', alt: 'Libro Community Manager desde casa, by Crudo_' },
 ];
 
 export const STEPS = [
@@ -37,7 +46,7 @@ export const STEPS = [
 
 export const PHOTOS = {
   idea: { src: '/img/idea-piccolino.jpg', alt: 'Moodboard de Piccolino abierto en Illustrator en una laptop, frente a una pared con collage', pos: '55% 47%' },
-  proceso: { src: '/img/proceso.jpg', alt: 'Integrante del equipo fotografiando una torta y bebidas junto a un ventanal con un cartel de neón', pos: 'center 58%' },
+  proceso: { src: '/img/cambio-dev.webp', raw: '/img/cambio-raw.webp', alt: 'Frasco de Nescafé Ice junto a un vaso de café frío sobre fondo azul, con luz y color ya revelados', pos: 'center 55%' },
   resultado: { src: '/img/resultado-malcriada.jpg', alt: 'Porción de torta de zanahoria con ilustraciones y el nombre Malcriada en rosa', pos: 'center 30%' },
   equipo: { src: '/img/equipo.jpg', alt: 'Las tres integrantes de Crudo posando juntas y sonriendo frente a una pared blanca', pos: 'center 40%' },
 };
@@ -124,7 +133,7 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-/** Integrantes: completar nombre, rol, texto y foto. Con `photo: null` el carrusel muestra el espacio reservado. */
+/** Integrantes, en el orden en que aparecen en el carrusel. La foto sale de las capas de /public/equipo. */
 export type Member = {
   name: string;
   role: string;
@@ -134,7 +143,7 @@ export type Member = {
 };
 
 export const TEAM: Member[] = [
-  { name: '[Nombre]', role: '[Rol]', origin: '[ARG // COL]', bio: '[Texto sobre la integrante: qué hace en Crudo_, de dónde viene y qué mezcla trae al equipo.]', photo: null },
-  { name: '[Nombre]', role: '[Rol]', origin: '[ARG // COL]', bio: '[Texto sobre la integrante: qué hace en Crudo_, de dónde viene y qué mezcla trae al equipo.]', photo: null },
-  { name: '[Nombre]', role: '[Rol]', origin: '[ARG // COL]', bio: '[Texto sobre la integrante: qué hace en Crudo_, de dónde viene y qué mezcla trae al equipo.]', photo: null },
+  { name: "Luz Belén Jaimes", role: "Productora y Directora Audiovisual | Editora de Video", origin: 'ARG', bio: "Profesional creativa formada en producción y dirección audiovisual, con experiencia en edición de video, dirección de arte, creación de contenido y comunicación visual. He participado en el desarrollo y la realización de proyectos de fotografía, rodajes cinematográficos, producciones de moda, videoclips y campañas publicitarias, involucrándome en distintas etapas del proceso creativo y productivo. Cuento con experiencia en la conceptualización de ideas, planificación de producciones, desarrollo de propuestas visuales y edición de contenido para marcas, plataformas digitales y proyectos audiovisuales. Combino una mirada creativa con habilidades técnicas y experiencia colaborando con fotógrafos, diseñadores, modelos, talentos, clientes y equipos multidisciplinarios.", photo: null },
+  { name: "Laura Lagos", role: "Social Media Manager", origin: 'COL', bio: "Soy Laura y me encargo de que las ideas en crudo encuentren su lugar en las redes. Escucho a cada marca, entiendo su personalidad y la transformo en contenido que conecta. Planifico, organizo y le doy ritmo a la comunicación, sin perder de vista las tendencias. Uso las métricas para entender qué funciona y seguir mejorando. Mi objetivo es que las marcas no solo se vean, sino que conecten de verdad con su comunidad.", photo: null },
+  { name: "Valeria Prada", role: "Diseñadora Gráfica", origin: 'COL', bio: "Soy Valeria, directora creativa y diseñadora gráfica. Trabajo constantemente con ideas: las transformo, las cuestiono y las reconstruyo hasta encontrar una forma de expresarlas visual y emocionalmente. Creo porque es parte de lo que soy, no solo de lo que hago. Paso mis días diseñando, explorando referencias y convirtiendo pensamientos en algo tangible. Me atrae lo crudo, lo imperfecto y todo aquello que tiene una intención detrás.", photo: null },
 ];

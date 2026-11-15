@@ -3,11 +3,11 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ContactBand, SectionLabel } from '@/components/Parts';
+import ServiceCards from '@/components/ServiceCards';
 import MailClub from '@/components/MailClub';
+import { DIGITALES, PACKS_NOTE } from '@/lib/data';
 
 export const metadata: Metadata = { title: 'Tienda' };
-
-const PRODUCTS = [1, 2, 3, 4];
 
 export default function Tienda() {
   return (
@@ -16,17 +16,22 @@ export default function Tienda() {
       <main>
         <section className="wrap page-hero page-hero--tight">
           <h1 className="display">Tienda<span className="dot">.</span></h1>
-          {/* índice: deja claro que la tienda tiene dos secciones separadas */}
+          {/* índice: deja claro que la tienda tiene tres secciones separadas */}
           <nav className="shop-index" aria-label="Secciones de la tienda">
             <a href="#mailclub" className="shop-index__item">
               <span className="label">( 01 )</span>
               <b>Mail Club</b>
-              <span className="label shop-index__n">2 ediciones</span>
+              <span className="label shop-index__n">3 ediciones</span>
             </a>
             <a href="#digitales" className="shop-index__item">
               <span className="label">( 02 )</span>
               <b>Productos digitales</b>
               <span className="label shop-index__n">Descargables</span>
+            </a>
+            <a href="#servicios" className="shop-index__item">
+              <span className="label">( 03 )</span>
+              <b>Servicios</b>
+              <span className="label shop-index__n">4 servicios</span>
             </a>
           </nav>
         </section>
@@ -51,20 +56,28 @@ export default function Tienda() {
           <MailClub />
         </section>
 
-        <section id="digitales" className="section">
+        <section id="digitales" className="section chapter--red shop-dig">
           <div className="wrap">
             <SectionLabel>( 02 ) Productos digitales</SectionLabel>
-            <div className="products">
-              {PRODUCTS.map((n) => (
-                <Link href="/contacto/" className="product" key={n}>
-                  <div className="ph" />
-                  <div className="product__row">
-                    <span>[PRODUCTO]</span>
-                    <span>[PRECIO]</span>
-                  </div>
-                </Link>
+            <div className="products products--ebooks">
+              {DIGITALES.map((p) => (
+                <article className="product product--ebook" key={p.name}>
+                  <div className="product__img"><img src={p.img} alt={p.alt} loading="lazy" decoding="async" /></div>
+                  <h3 className="product__t">{p.name}</h3>
+                  <s className="product__old">{p.old}</s>
+                  <p className="product__now"><b>{p.price}</b><span>{p.off}</span></p>
+                  <Link href="/contacto/" className="btn btn--cream">Comprar</Link>
+                </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section id="servicios" className="section">
+          <div className="wrap">
+            <SectionLabel>( 03 ) Servicios</SectionLabel>
+            <ServiceCards />
+            <p className="packs__note lead">{PACKS_NOTE} <Link href="/contacto/" className="link">Escribinos ↗</Link></p>
           </div>
         </section>
 

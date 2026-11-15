@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ParenPhoto, SectionLabel, Title } from '@/components/Parts';
-import { PACKS, PHOTOS, SERVICES, STEPS } from '@/lib/data';
+import { PACKS, PACKS_NOTE, PHOTOS, SERVICES, STEPS } from '@/lib/data';
 
 export const metadata: Metadata = { title: 'Inicio' };
 
@@ -65,10 +65,11 @@ export default function Inicio() {
                   <span className="label">( 0{i + 1} )</span>
                   <h3 className="pack__t">{p.name}</h3>
                   <p className="pack__d">{p.desc}</p>
-                  <span className="pack__price">{p.price}</span>
+                  {p.items && <ul className="pack__items">{p.items.map((it) => <li key={it}>{it}</li>)}</ul>}
                 </article>
               ))}
             </div>
+            <p className="packs__note lead" data-rv>{PACKS_NOTE} <Link href="/contacto/" className="link">Escribinos ↗</Link></p>
           </div>
         </section>
 
