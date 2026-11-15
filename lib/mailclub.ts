@@ -17,7 +17,7 @@ export type Piece = {
 };
 
 export type Edition = {
-  id: 'septiembre' | 'octubre';
+  id: 'septiembre' | 'octubre' | 'noviembre';
   n: string;
   mes: string;
   tema: string;
@@ -82,6 +82,31 @@ export const EDITIONS: Edition[] = [
       { id: 'murcielago', label: 'Sticker de murciélago', note: 'Alas abiertas', x: 66, y: 52, w: 12, rot: 8, d: 22 },
       { id: 'castillo', label: 'Sticker de castillo', note: 'Torres góticas', x: 9, y: 13, w: 8, rot: -10, d: 20 },
       { id: 'cuervo', label: 'Sticker de cuervo', note: 'El mensajero de la noche', x: 91, y: 13, w: 7.5, rot: 12, d: 20 },
+    ]),
+  },
+  {
+    id: 'noviembre',
+    n: '03',
+    mes: 'Noviembre',
+    tema: 'Muñecas de papel',
+    lema: 'Vestí, jugá y encontrá las diferencias.',
+    desc: 'La edición actual: un sobre verde lleno de nostalgia noventera, con tres muñecas de papel para vestir, stickers de ropa, un juego de encontrar las diferencias, una carta de bienvenida y papeles con textura.',
+    bg: '#2b1646',
+    ink: '#f6eefc',
+    accent: '#ff77b7',
+    ticker: ['Muñecas de papel', 'Vestí a tu muñeca', 'Encontrá las diferencias', 'Hola', 'Edición 03'],
+    layers: MEDIA.noviembre.layers,
+    pieces: build('noviembre', [
+      { id: 'poster-1', label: 'Muñeca de papel 1', note: 'Con su cuarto, su perro y todo para vestir', x: 12, y: 41, w: 16, rot: -9, d: 14 },
+      { id: 'ropa-lau', label: 'Stickers de ropa (Lau)', note: 'Prendas para vestir a la muñeca', x: 88, y: 40, w: 16, rot: 8, d: 12 },
+      { id: 'carta', label: 'Carta: ¡Hola!', note: 'La bienvenida de la edición de noviembre', x: 20, y: 77, w: 22, rot: -6, d: 20 },
+      { id: 'diferencias', label: 'Encontrá las diferencias', note: 'Dos cuartos casi iguales: ¿cuántas encontrás?', x: 81, y: 77, w: 22, rot: 7, d: 18 },
+      { id: 'papel-rayas', label: 'Papel rayado', note: 'Rayas rosas y verdes para dibujar o forrar', x: 63, y: 22, w: 11, rot: 5, d: 10 },
+      { id: 'poster-2', label: 'Muñeca de papel 2', note: 'Otro cuarto, otro gato, otra historia', x: 38, y: 53, w: 13, rot: -5, d: 24 },
+      { id: 'poster-3', label: 'Muñeca de papel 3', note: 'La tercera muñeca de la colección', x: 64, y: 52, w: 13, rot: 6, d: 22 },
+      { id: 'ropa-luz', label: 'Stickers de ropa (Luz)', note: 'Prendas para vestir a la muñeca', x: 11, y: 13, w: 12, rot: -12, d: 20 },
+      { id: 'ropa-vale', label: 'Stickers de ropa (Vale)', note: 'Prendas para vestir a la muñeca', x: 90, y: 13, w: 12, rot: 14, d: 20 },
+      { id: 'papel-verde', label: 'Papel verde', note: 'Con remolinos plateados, para escribir', x: 35, y: 18, w: 10, rot: -7, d: 12 },
     ]),
   },
 ];

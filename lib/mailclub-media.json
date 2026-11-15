@@ -165,5 +165,81 @@
         "h": 253
       }
     }
+  },
+  "noviembre": {
+    "layers": {
+      "closed": {
+        "src": "/mailclub/noviembre/sobre-closed.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "back": {
+        "src": "/mailclub/noviembre/sobre-back.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "content": {
+        "src": "/mailclub/noviembre/sobre-content.webp",
+        "w": 960,
+        "h": 1200
+      },
+      "front": {
+        "src": "/mailclub/noviembre/sobre-front.webp",
+        "w": 960,
+        "h": 1200
+      }
+    },
+    "pieces": {
+      "carta": {
+        "src": "/mailclub/noviembre/carta.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "diferencias": {
+        "src": "/mailclub/noviembre/diferencias.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "papel-rayas": {
+        "src": "/mailclub/noviembre/papel-rayas.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "papel-verde": {
+        "src": "/mailclub/noviembre/papel-verde.webp",
+        "w": 707,
+        "h": 1000
+      },
+      "poster-1": {
+        "src": "/mailclub/noviembre/poster-1.webp",
+        "w": 704,
+        "h": 1000
+      },
+      "poster-2": {
+        "src": "/mailclub/noviembre/poster-2.webp",
+        "w": 704,
+        "h": 1000
+      },
+      "poster-3": {
+        "src": "/mailclub/noviembre/poster-3.webp",
+        "w": 704,
+        "h": 1000
+      },
+      "ropa-lau": {
+        "src": "/mailclub/noviembre/ropa-lau.webp",
+        "w": 704,
+        "h": 1000
+      },
+      "ropa-luz": {
+        "src": "/mailclub/noviembre/ropa-luz.webp",
+        "w": 704,
+        "h": 1000
+      },
+      "ropa-vale": {
+        "src": "/mailclub/noviembre/ropa-vale.webp",
+        "w": 704,
+        "h": 1000
+      }
+    }
   }
 }

@@ -26,7 +26,7 @@ function Stamp({ n }: { n: string }) {
  * al abrir el sobre la tarjeta pasa a mitad y mitad: el detalle a un lado y el escenario con las piezas al otro.
  * Al elegir una pieza para verla a detalle, pasa al frente: vuela al centro del escenario, se agranda y el resto se atenúa.
  */
-function MailEdition({ e, flip }: { e: Edition; flip: boolean }) {
+function MailEdition({ e, flip, current }: { e: Edition; flip: boolean; current: boolean }) {
   const [open, setOpen] = useState(false);
   const [settled, setSettled] = useState(false);
   const [hot, setHot] = useState<string | null>(null);
@@ -147,7 +147,7 @@ function MailEdition({ e, flip }: { e: Edition; flip: boolean }) {
       <span className="mc-num" aria-hidden="true">{e.n}</span>
 
       <header className="mc-head">
-        <span className="label mc-head__n">( Edición {e.n} )</span>
+        <span className="label mc-head__n">( Edición {e.n} ){current ? <b className="mc-badge">Edición actual</b> : null}</span>
         <h3 className="mc-mes display" style={css({ '--len': e.mes.length + 1 })}>{e.mes}<span className="mc-dot">.</span></h3>
         <p className="mc-tema"><b>{e.tema}.</b> {e.lema}</p>
       </header>
@@ -272,12 +272,41 @@ function MailEdition({ e, flip }: { e: Edition; flip: boolean }) {
   );
 }
 
+/**
+ * Una edición a la vez: la más reciente arriba y destacada ("Edición actual"); las anteriores, en un selector
+ * compacto. Así la página no crece con cada mes nuevo.
+ */
 export default function MailClub() {
+  const latest = EDITIONS[EDITIONS.length - 1];
+  const [sel, setSel] = useState(latest.id);
+  const cur = EDITIONS.find((e) => e.id === sel) ?? latest;
+  const list = [...EDITIONS].reverse();
+
   return (
     <div className="mc">
-      {EDITIONS.map((e, i) => (
-        <MailEdition key={e.id} e={e} flip={i % 2 === 1} />
-      ))}
+      <div className="wrap">
+        <nav className="mc-pick" aria-label="Elegir edición del Mail Club">
+          {list.map((e) => (
+            <button
+              key={e.id}
+              type="button"
+              className={`mc-pick__b${e.id === latest.id ? ' is-latest' : ''}`}
+              aria-pressed={sel === e.id}
+              style={css({ '--pk-bg': e.bg, '--pk-ink': e.ink, '--pk-ac': e.accent })}
+              onClick={() => setSel(e.id)}
+            >
+              <img src={e.layers.closed.src} alt="" width={e.layers.closed.w} height={e.layers.closed.h} loading="lazy" decoding="async" draggable={false} />
+              <span className="mc-pick__t">
+                <span className="label">( {e.n} ){e.id === latest.id ? ' · Edición actual' : ''}</span>
+                <b>{e.mes}</b>
+                <i>{e.tema}</i>
+              </span>
+              {e.id === latest.id && <span className="mc-pick__new label">Nueva</span>}
+            </button>
+          ))}
+        </nav>
+      </div>
+      <MailEdition key={cur.id} e={cur} flip={false} current={cur.id === latest.id} />
     </div>
   );
 }

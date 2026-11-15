@@ -40,6 +40,18 @@ const PIECES = {
     cuervo: 'piezas_individuales/sticker_cuervo.png',
     murcielago: 'piezas_individuales/sticker_murcielago.png',
   },
+  noviembre: {
+    carta: 'piezas_individuales/carta_hola.png',
+    diferencias: 'piezas_individuales/encontra_las_diferencias.png',
+    'papel-rayas': 'piezas_individuales/papel_textura_rayas.png',
+    'papel-verde': 'piezas_individuales/papel_textura_verde.png',
+    'poster-1': 'piezas_individuales/poster_muneca_1.png',
+    'poster-2': 'piezas_individuales/poster_muneca_2.png',
+    'poster-3': 'piezas_individuales/poster_muneca_3.png',
+    'ropa-lau': 'piezas_individuales/stickers_ropa_lau.png',
+    'ropa-luz': 'piezas_individuales/stickers_ropa_luz.png',
+    'ropa-vale': 'piezas_individuales/stickers_ropa_vale.png',
+  },
 };
 
 async function emit(file, dest, { max, quality, trim }) {
@@ -49,9 +61,11 @@ async function emit(file, dest, { max, quality, trim }) {
   return { w: out.width, h: out.height, kb: Math.round(out.size / 1024) };
 }
 
-const manifest = {};
+// MESES=noviembre node scripts/build-mailclub.mjs regenera solo esos meses y conserva el resto del manifiesto
+const ONLY = process.env.MESES ? process.env.MESES.split(',') : null;
+const manifest = ONLY && fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : {};
 let total = 0;
-for (const mes of Object.keys(PIECES)) {
+for (const mes of Object.keys(PIECES).filter((k) => !ONLY || ONLY.includes(k))) {
   const dir = path.join(SRC, mes);
   const outDir = path.join(OUT, mes);
   fs.rmSync(outDir, { recursive: true, force: true });
@@ -64,7 +78,7 @@ for (const mes of Object.keys(PIECES)) {
     total += r.kb;
   }
   for (const [id, rel] of Object.entries(PIECES[mes])) {
-    const small = /sticker/.test(rel);
+    const small = /sticker/.test(rel) && !/ropa/.test(rel);
     const r = await emit(path.join(dir, rel), path.join(outDir, `${id}.webp`), { max: small ? 700 : 1000, quality: 84, trim: true });
     m.pieces[id] = { src: `/mailclub/${mes}/${id}.webp`, w: r.w, h: r.h };
     total += r.kb;

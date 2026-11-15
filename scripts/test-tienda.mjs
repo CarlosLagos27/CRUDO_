@@ -1,4 +1,4 @@
-// Prueba la tienda: Mail Club con sus dos ediciones. Uso: node scripts/test-tienda.mjs
+// Prueba la tienda: Mail Club con sus ediciones. Uso: node scripts/test-tienda.mjs
 import { chromium } from 'playwright-core';
 const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
 let fails = 0;
@@ -10,7 +10,8 @@ await p.goto('http://localhost:3000/tienda/', { waitUntil: 'networkidle' });
 const H = await p.evaluate(() => document.documentElement.scrollHeight);
 for (let y = 0; y < H; y += 500) { await p.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), y); await p.waitForTimeout(120); }
 
-ok('2 ediciones', (await p.locator('.mc-card').count()) === 2);
+ok('una edición visible a la vez', (await p.locator('.mc-card').count()) === 1);
+ok('3 ediciones en el selector', (await p.locator('.mc-pick__b').count()) === 3);
 ok('imágenes cargan', (await p.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0).length)) === 0);
 ok('sin 4xx/5xx', bad.length === 0, bad.slice(0, 2).join(' '));
 
