@@ -105,6 +105,8 @@ export default function ProjectsList() {
   const [rail, setRail] = useState(false);
   const [active, setActive] = useState('');
   const [opened, setOpened] = useState<string[]>([]);
+  /** Caso que se muestra debajo del índice: uno a la vez, así la página no crece con cada cliente nuevo. */
+  const [sel, setSel] = useState('');
   /** 'out': saliendo, 'gone': oculto, 'in': entrando; sin valor: estable. */
   const [phase, setPhase] = useState<Record<string, 'in' | 'out' | 'gone'>>({});
   const gone = (p: Project) => phase[p.slug] === 'gone';
@@ -136,6 +138,17 @@ export default function ProjectsList() {
     };
     raf = requestAnimationFrame(step);
   };
+  const select = (slug: string) => {
+    setSel(slug);
+    setOne(slug, true);
+    if (window.location.hash !== `#${slug}`) window.history.replaceState(null, '', `#${slug}`);
+    window.setTimeout(() => document.getElementById(slug)?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }), 60);
+  };
+  const closeCase = () => {
+    setSel('');
+    window.history.replaceState(null, '', window.location.pathname);
+    window.setTimeout(() => document.querySelector('.pj-index')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 60);
+  };
   const show = (p: Project) => filter === ALL || p.servicios.includes(filter);
 
   /** Filtra con animación: los que no corresponden se desvanecen y recién después se quitan; los que quedan entran escalonados. */
@@ -150,13 +163,13 @@ export default function ProjectsList() {
       });
       return upd;
     });
+    if (sel && !will(PROJECTS.find((p) => p.slug === sel)!)) setSel('');
     setFilter(next);
     say(next === ALL ? 'filterAll' : 'filter');
     window.setTimeout(() => setPhase((cur) => Object.fromEntries(Object.entries(cur).map(([k, v]) => [k, v === 'out' ? 'gone' : v])) as typeof cur), 380);
     window.setTimeout(() => setPhase((cur) => Object.fromEntries(Object.entries(cur).filter(([, v]) => v !== 'in')) as typeof cur), 1500);
   };
   const shown = PROJECTS.filter(show);
-  const allOpen = shown.length > 0 && shown.every((p) => isOpen(p.slug));
 
   useEffect(() => {
     let t = 0;
@@ -182,6 +195,7 @@ export default function ProjectsList() {
     const openFromHash = () => {
       const h = decodeURIComponent(window.location.hash.slice(1));
       if (!h || !PROJECTS.some((p) => p.slug === h)) return;
+      setSel(h);
       setOne(h, true);
       window.clearTimeout(t);
       t = window.setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: 'start' }), 150);
@@ -243,13 +257,6 @@ export default function ProjectsList() {
             </button>
           ))}
           <span key={shown.length} className="pj-count label" aria-live="polite">{shown.length} de {PROJECTS.length} proyectos</span>
-          <button
-            type="button"
-            className="chip label pj-all"
-            onClick={() => { setOpened(allOpen ? [] : shown.map((p) => p.slug)); say(allOpen ? 'collapseAll' : 'expandAll'); }}
-          >
-            {allOpen ? '− Recoger todos' : '+ Expandir todos'}
-          </button>
         </div>
       </div>
 
@@ -268,14 +275,14 @@ export default function ProjectsList() {
                 onMouseEnter={() => setPeek(p.slug)}
                 onMouseLeave={() => setPeek('')}
               >
-                <a className="pj-row" href={`#${p.slug}`} onClick={() => setOne(p.slug, true)}>
+                <a className="pj-row" href={`#${p.slug}`} aria-current={sel === p.slug ? 'true' : undefined} data-sel={sel === p.slug ? '1' : undefined} onClick={(e) => { e.preventDefault(); select(p.slug); }}>
                   <span className="pj-row__n label">{p.n}</span>
                   <span className="pj-row__thumb" aria-hidden="true"><img src={m.cover.src} alt="" loading="lazy" decoding="async" /></span>
                   <span className="pj-row__name">{p.cliente}</span>
                   <span className="pj-row__rubro">{p.rubro}</span>
                   <span className="pj-row__tags">{p.servicios.map((s) => <i key={s} className="label">{s}</i>)}</span>
                   <span className="pj-row__meta label">{pieces} piezas</span>
-                  <span className="pj-row__go" aria-hidden="true">↓</span>
+                  <span className="pj-row__go" aria-hidden="true">{sel === p.slug ? '●' : '↓'}</span>
                 </a>
               </li>
             );
@@ -293,7 +300,7 @@ export default function ProjectsList() {
         const count = main.length + nStory;
         const on = isOpen(p.slug);
         return (
-          <section key={p.slug} id={p.slug} hidden={gone(p)} data-phase={phase[p.slug] || undefined} data-sec className="chapter pj" style={vars} aria-label={p.cliente}>
+          <section key={p.slug} id={p.slug} hidden={gone(p) || sel !== p.slug} data-phase={phase[p.slug] || undefined} data-sec className="chapter pj" style={vars} aria-label={p.cliente}>
             <div className="wrap">
               <div className="pj__top">
                 <div className="pj__id">
@@ -387,6 +394,21 @@ export default function ProjectsList() {
               </button>
                </div>
               </div>
+
+              <nav className="pj__nav" aria-label="Moverse entre proyectos">
+                {(() => {
+                  const k = shown.indexOf(p);
+                  const prev = shown[k - 1];
+                  const next = shown[k + 1];
+                  return (
+                    <>
+                      {prev ? <button type="button" className="pj__nav-b label" onClick={() => select(prev.slug)}>← {prev.cliente}</button> : <span />}
+                      <button type="button" className="pj__nav-b pj__nav-b--idx label" onClick={closeCase}>Ver índice</button>
+                      {next ? <button type="button" className="pj__nav-b label" onClick={() => select(next.slug)}>{next.cliente} →</button> : <span />}
+                    </>
+                  );
+                })()}
+              </nav>
             </div>
           </section>
         );
@@ -401,7 +423,7 @@ export default function ProjectsList() {
             data-active={active === p.slug ? '1' : '0'}
             tabIndex={rail ? 0 : -1}
             style={css({ '--rc': p.bg, '--ri': p.ink })}
-            onClick={() => setOne(p.slug, true)}
+            onClick={(e) => { e.preventDefault(); select(p.slug); }}
             aria-label={p.cliente}
           >
             <span className="label">{p.n}</span>
