@@ -1545,8 +1545,8 @@ html.js [data-sec].is-in, html.rv-fallback [data-sec] { clip-path: inset(0 0 0 0
 @media (max-width: 560px) { .flc { grid-template-columns: 1fr; } .flc__card { min-height: 400px; } }
 @media (prefers-reduced-motion: reduce) { .flc__inner { transition-duration: 0.01s; } .flc__cur { display: none; } }
 
-/* con foto RAW real no hace falta simular el apagado: solo un velo suave */
-.rev__raw--real { filter: none; transform: none; }
+/* la foto RAW arranca en blanco y negro (un poco plana) y el color entra al revelar */
+.rev__raw--real { filter: grayscale(1) contrast(0.95) brightness(1.02); transform: none; }
 
 /* Mail Club: selector de ediciones (la más reciente destacada) y una sola tarjeta visible */
 .mc-pick { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: var(--space-3); padding-bottom: var(--space-5); }

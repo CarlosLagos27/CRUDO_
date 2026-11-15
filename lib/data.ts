@@ -38,10 +38,9 @@ export const DIGITALES = [
 ];
 
 export const STEPS = [
-  { t: '[Paso 1]', d: '[Texto del paso, a validar]' },
-  { t: '[Paso 2]', d: '[Texto del paso, a validar]' },
-  { t: '[Paso 3]', d: '[Texto del paso, a validar]' },
-  { t: '[Paso 4]', d: '[Texto del paso, a validar]' },
+  { t: 'La idea', d: 'Partimos de tu idea tal como viene: la escuchamos, la ordenamos y definimos hacia dónde va.' },
+  { t: 'El proceso', d: 'Diseño, cámara y medios tradicionales: probamos, ajustamos y te mostramos el avance en cada paso.' },
+  { t: 'El resultado', d: 'Una marca, una pieza o una campaña lista para salir al mundo.' },
 ];
 
 export const PHOTOS = {
