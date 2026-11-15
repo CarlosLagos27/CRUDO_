@@ -1,6 +1,6 @@
 import ClipEyes from '@/components/ClipEyes';
 
-type Props = { src: string; alt: string; pos?: string; head: React.ReactNode };
+type Props = { src: string; raw?: string; alt: string; pos?: string; head: React.ReactNode };
 
 const N = 30;
 /** Engagement diario: antes (caído y a la baja) -> después (en alza). Valores 0–1. */
@@ -38,7 +38,7 @@ const HEAT = Array.from({ length: 28 }, (_, i) => {
  * y todo lo demás (círculo de revelado, contadores, histograma) se anima con :has() y @property.
  * Sin JS; el botón se opera con mouse, toque o teclado (Espacio).
  */
-export default function Develop({ src, alt, pos = 'center', head }: Props) {
+export default function Develop({ src, raw, alt, pos = 'center', head }: Props) {
   return (
     <div className="rev">
       {head}
@@ -48,7 +48,7 @@ export default function Develop({ src, alt, pos = 'center', head }: Props) {
 
         <div className="rev__frame">
           <div className="rev__imgs">
-            <img className="rev__raw" src={src} alt="" aria-hidden="true" draggable={false} style={{ objectPosition: pos }} />
+            <img className={`rev__raw${raw ? ' rev__raw--real' : ''}`} src={raw ?? src} alt="" aria-hidden="true" draggable={false} style={{ objectPosition: pos }} />
             <img className="rev__dev" src={src} alt={alt} draggable={false} style={{ objectPosition: pos }} />
             <span className="rev__grain" aria-hidden="true" />
             <span className="rev__tag rev__tag--raw label">( RAW )</span>

@@ -44,6 +44,7 @@ export default function NosotrasPage() {
         <section data-sec className="chapter chapter--brown develop-sec" aria-labelledby="revelado">
           <Develop
             src={PHOTOS.proceso.src}
+            raw={PHOTOS.proceso.raw}
             alt={PHOTOS.proceso.alt}
             pos={PHOTOS.proceso.pos}
             head={
