@@ -282,6 +282,9 @@ export default function MailClub() {
   const cur = EDITIONS.find((e) => e.id === sel) ?? latest;
   const list = [...EDITIONS].reverse();
 
+  // la tarjeta se vuelve a montar al cambiar de edición: Clippy debe observar la nueva
+  useEffect(() => { window.dispatchEvent(new Event('clippy:rescan')); }, [sel]);
+
   return (
     <div className="mc">
       <div className="wrap">
@@ -293,7 +296,7 @@ export default function MailClub() {
               className={`mc-pick__b${e.id === latest.id ? ' is-latest' : ''}`}
               aria-pressed={sel === e.id}
               style={css({ '--pk-bg': e.bg, '--pk-ink': e.ink, '--pk-ac': e.accent })}
-              onClick={() => setSel(e.id)}
+              onClick={() => { if (sel !== e.id) say('mailpick', `mc-${e.id}`); setSel(e.id); }}
             >
               <img src={e.layers.closed.src} alt="" width={e.layers.closed.w} height={e.layers.closed.h} loading="lazy" decoding="async" draggable={false} />
               <span className="mc-pick__t">

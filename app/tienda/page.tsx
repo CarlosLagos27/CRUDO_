@@ -56,7 +56,7 @@ export default function Tienda() {
           <MailClub />
         </section>
 
-        <section id="digitales" className="section chapter--red shop-dig">
+        <section id="digitales" data-clip="tienda-digitales" className="section chapter--red shop-dig">
           <div className="wrap">
             <SectionLabel>( 02 ) Productos digitales</SectionLabel>
             <div className="products products--ebooks">
@@ -73,7 +73,7 @@ export default function Tienda() {
           </div>
         </section>
 
-        <section id="servicios" className="section">
+        <section id="servicios" data-clip="tienda-servicios" className="section">
           <div className="wrap">
             <SectionLabel>( 03 ) Servicios</SectionLabel>
             <ServiceCards />

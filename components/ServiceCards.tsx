@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { PACKS } from '@/lib/data';
 
 const pad = (n: number) => String(n).padStart(2, '0');
+const say = (group: string, slug?: string) => window.dispatchEvent(new CustomEvent('clippy:say', { detail: { group, slug } }));
 
 /**
  * Servicios como cartas que se dan vuelta: al frente el título sobre el logo difuminado,
@@ -15,6 +16,7 @@ export default function ServiceCards() {
   const [touched, setTouched] = useState(false);
   const toggle = (i: number) => {
     setTouched(true);
+    if (flipped[i]) say('svcback'); else say('svcflip', `svc:${i}`);
     setFlipped((f) => f.map((v, k) => (k === i ? !v : v)));
   };
 

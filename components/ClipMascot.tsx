@@ -22,6 +22,8 @@ const POSES: [string, BasePose][] = [
   ['footer', 'bye'],
   ['@pj', 'hop'],
   ['@mc', 'wave'],
+  ['#digitales', 'hop'],
+  ['#servicios', 'point'],
   ['.chapter:not(.develop-sec)', 'hop'],
 ];
 
@@ -126,6 +128,13 @@ export default function ClipMascot() {
     queue.current?.push(t, prio ?? PRIO[group] ?? 1);
   }, []);
   const speakText = useCallback((t: string, prio = 2, force = false) => queue.current?.push(t, prio, { force }), []);
+  /** Hay secciones que cambian de elemento (p. ej. la edición del Mail Club): el evento pide volver a observarlas. */
+  const [scan, setScan] = useState(0);
+  useEffect(() => {
+    const on = () => setScan((n) => n + 1);
+    window.addEventListener('clippy:rescan', on);
+    return () => window.removeEventListener('clippy:rescan', on);
+  }, []);
   const speakRef = useRef(speak);
   useEffect(() => { speakRef.current = speak; }, [speak]);
 
@@ -275,7 +284,7 @@ export default function ClipMascot() {
     const pjTargets = Array.from(document.querySelectorAll<HTMLElement>('section.pj')).map((el, i) => ({ el, p: PJ_POSES[i % PJ_POSES.length] as BasePose, g: el.id }));
     const mcTargets = Array.from(document.querySelectorAll<HTMLElement>('.mc-card')).map((el, i) => ({ el, p: (i % 2 ? 'hop' : 'wave') as BasePose, g: `mc-${el.dataset.edition}` }));
     const targets = POSES.flatMap(([sel, p]) =>
-      sel === '@pj' ? pjTargets : sel === '@mc' ? mcTargets : Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p, g: '' })),
+      sel === '@pj' ? pjTargets : sel === '@mc' ? mcTargets : Array.from(document.querySelectorAll<HTMLElement>(sel)).map((el) => ({ el, p, g: el.dataset.clip || '' })),
     );
     if (!targets.length || !('IntersectionObserver' in window)) return;
     const ratio = new Map<Element, number>();
@@ -296,7 +305,7 @@ export default function ClipMascot() {
     );
     targets.forEach(({ el }) => io.observe(el));
     return () => io.disconnect();
-  }, [path]);
+  }, [path, scan]);
 
   /* ───────── 2) pose mostrada: si cambia de borde, primero se esconde y reaparece del otro lado ───────── */
   useEffect(() => {

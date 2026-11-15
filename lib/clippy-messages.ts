@@ -14,8 +14,8 @@ export const SAY: Record<string, string[]> = {
   tour: ['Seguime, te muestro lo importante.'],
 
   // revelar la foto
-  cheer: ['¡Qué lindo quedó!', '¡Eso es revelar!', 'De RAW a obra de arte.'],
-  uncheer: ['De vuelta en crudo.', '¿Otra vez? ¡Dale!'],
+  cheer: ['¡Qué lindo quedó!', '¡Eso es revelar!', 'De RAW a obra de arte.', 'Ese Nescafé quedó divino.', 'Mirá cómo cambió la luz.'],
+  uncheer: ['De vuelta en crudo.', '¿Otra vez? ¡Dale!', 'Así venía de la cámara.'],
 
   // interacción directa
   poke: ['¡Ey!', '¡Cosquillas!', '¡Auch!', 'Eso hace cosquillas.'],
@@ -63,6 +63,11 @@ export const SAY: Record<string, string[]> = {
   collapseAll: ['A ordenar todo.', 'Todo guardadito.'],
   filter: ['Buen filtro.', '¡A ver qué sale!', 'Ordenando los proyectos...'],
   filterAll: ['Todos de vuelta.', 'Acá están todos.'],
+  // proyectos de a uno y tienda
+  pjindex: ['Volvemos al índice.', 'Elegí otro cliente.', 'Un caso a la vez, así no te perdés.', 'Listo, ¿cuál sigue?'],
+  mailpick: ['Cambiamos de edición.', 'Cada mes tiene su historia.', 'A ver qué trae este sobre.'],
+  svcflip: ['Mirá lo que incluye.', '¡Dimos vuelta la carta!', 'Acá está el detalle.'],
+  svcback: ['De vuelta al frente.', 'Listo, la carta boca arriba.', '¿Cuál mirás ahora?'],
   zoom: ['¡Qué lindo se ve en grande!', 'Esa pieza quedó espectacular.', 'Los detalles importan.'],
 };
 
@@ -72,7 +77,7 @@ export const PRIO: Record<string, number> = {
   poke: 2, dizzy: 2, angry: 2, calm: 1, tickle: 2, scare: 2, drag: 2, throw: 2, land: 1, home: 1, pet: 2, fast: 1,
   yawn: 1, stretch: 1, wake: 1,
   tour: 3, hide: 3, show: 3, sound_on: 3, quiet_off: 3, secret_name: 3, secret_konami: 3,
-  mailopen: 2, mailclose: 1, mailpiece: 1,
+  mailopen: 2, mailclose: 1, mailpiece: 1, mailpick: 2, pjindex: 1, svcflip: 2, svcback: 1,
   expand: 2, collapse: 1, expandAll: 2, collapseAll: 1, filter: 2, filterAll: 1, zoom: 1,
   cheer: 2, uncheer: 1,
 };
@@ -107,6 +112,12 @@ export const SAY_MC: Record<string, string[]> = {
   'noviembre:diferencias': ['Ojo de lince: ¡a buscar!', 'Dos cuartos, muchas diferencias.'],
   'noviembre:papel-rayas': ['Rayas rosas y verdes.', 'Ideal para forrar o dibujar.'],
   'noviembre:papel-verde': ['Remolinos plateados, ¡qué lindo!', 'Un papel para escribir con calma.'],
+  'svc:0': ['Redes: tu marca, viva todos los días.', 'Estrategia, contenido y calendario mensual.', 'Laura se encarga de que conecten.'],
+  'svc:1': ['De la idea en crudo a una identidad.', 'Branding, packaging, merch... ¡y mucho más!', 'Valeria lo convierte en imágenes.'],
+  'svc:2': ['Lo que tu marca cuenta, en movimiento.', 'Video, fotos y cobertura de eventos.', 'Luz lo dirige y lo edita.'],
+  'svc:3': ['Armamos el pack con lo que necesites.', 'Combiná servicios de las tres áreas.', 'Cada proyecto es único, y su precio también.'],
+  'tienda-digitales': ['Ebooks para vivir de las redes.', 'Guía y planner, o los dos con 50% off.', '¿Community Manager desde casa? ¡Se puede!', 'El combo sale $30.000.'],
+  'tienda-servicios': ['Tocá las cartas para darles vuelta.', 'Cada servicio tiene su detalle atrás.', 'Pedinos tu presupuesto, sin compromiso.'],
   'septiembre:libreta': ['Rosas en relieve, ¡qué elegancia!', 'Una libreta bordó para anotar de todo.'],
   'septiembre:sudoku': ['The Sudoku: nivel 1, a pensar un rato.', 'Lápiz en mano, que arranca el nivel 1.'],
   'septiembre:carta': ['La carta explica el tema del mes.', 'Rojo: pasión, amor y fuerza.'],

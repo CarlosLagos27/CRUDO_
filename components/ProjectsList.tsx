@@ -10,7 +10,7 @@ const ALL = 'Todos';
 const FILTERS = SERVICES.filter((s) => PROJECTS.some((p) => p.servicios.includes(s)));
 
 /** Avisa a Clippy (ClipMascot) de lo que está pasando en la lista. */
-const say = (group: string) => window.dispatchEvent(new CustomEvent('clippy:say', { detail: { group } }));
+const say = (group: string, slug?: string) => window.dispatchEvent(new CustomEvent('clippy:say', { detail: { group, slug } }));
 
 const css = (o: Record<string, string | number>) => o as React.CSSProperties;
 
@@ -139,12 +139,14 @@ export default function ProjectsList() {
     raf = requestAnimationFrame(step);
   };
   const select = (slug: string) => {
+    say('expand', slug);
     setSel(slug);
     setOne(slug, true);
     if (window.location.hash !== `#${slug}`) window.history.replaceState(null, '', `#${slug}`);
     window.setTimeout(() => document.getElementById(slug)?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }), 60);
   };
   const closeCase = () => {
+    say('pjindex');
     setSel('');
     window.history.replaceState(null, '', window.location.pathname);
     window.setTimeout(() => document.querySelector('.pj-index')?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 60);
