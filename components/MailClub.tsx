@@ -26,7 +26,7 @@ function Stamp({ n }: { n: string }) {
  * al abrir el sobre la tarjeta pasa a mitad y mitad: el detalle a un lado y el escenario con las piezas al otro.
  * Al elegir una pieza para verla a detalle, pasa al frente: vuela al centro del escenario, se agranda y el resto se atenúa.
  */
-function MailEdition({ e, flip, current }: { e: Edition; flip: boolean; current: boolean }) {
+function MailEdition({ e, flip, current, instant }: { e: Edition; flip: boolean; current: boolean; instant: boolean }) {
   const [open, setOpen] = useState(false);
   const [settled, setSettled] = useState(false);
   const [hot, setHot] = useState<string | null>(null);
@@ -137,7 +137,7 @@ function MailEdition({ e, flip, current }: { e: Edition; flip: boolean; current:
 
   return (
     <article
-      className={`mc-card mc-card--${e.id}${flip ? ' mc-card--flip' : ''}`}
+      className={`mc-card mc-card--${e.id}${flip ? ' mc-card--flip' : ''}${instant ? ' is-in' : ''}`}
       style={vars}
       data-open={open ? '1' : '0'}
       data-edition={e.id}
@@ -279,6 +279,8 @@ function MailEdition({ e, flip, current }: { e: Edition; flip: boolean; current:
 export default function MailClub() {
   const latest = EDITIONS[EDITIONS.length - 1];
   const [sel, setSel] = useState(latest.id);
+  /** La tarjeta que aparece al cambiar de edición es un elemento nuevo: RevealInit no la vería nunca y quedaría invisible. */
+  const [switched, setSwitched] = useState(false);
   const cur = EDITIONS.find((e) => e.id === sel) ?? latest;
   const list = [...EDITIONS].reverse();
 
@@ -296,7 +298,7 @@ export default function MailClub() {
               className={`mc-pick__b${e.id === latest.id ? ' is-latest' : ''}`}
               aria-pressed={sel === e.id}
               style={css({ '--pk-bg': e.bg, '--pk-ink': e.ink, '--pk-ac': e.accent })}
-              onClick={() => { if (sel !== e.id) say('mailpick', `mc-${e.id}`); setSel(e.id); }}
+              onClick={() => { if (sel !== e.id) say('mailpick', `mc-${e.id}`); setSwitched(true); setSel(e.id); }}
             >
               <img src={e.layers.closed.src} alt="" width={e.layers.closed.w} height={e.layers.closed.h} loading="lazy" decoding="async" draggable={false} />
               <span className="mc-pick__t">
@@ -309,7 +311,7 @@ export default function MailClub() {
           ))}
         </nav>
       </div>
-      <MailEdition key={cur.id} e={cur} flip={false} current={cur.id === latest.id} />
+      <MailEdition key={cur.id} e={cur} flip={false} current={cur.id === latest.id} instant={switched} />
     </div>
   );
 }
