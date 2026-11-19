@@ -32,9 +32,9 @@ export const PACKS: { name: string; desc: string; items?: string[]; red?: boolea
 
 /** Productos digitales de la tienda (ebooks). Fotos en /public/tienda, con el mismo rojo de fondo de la sección. */
 export const DIGITALES = [
-  { name: 'Guía CM desde casa + Planner mensual', old: '$60.000', price: '$30.000', off: '50% OFF', img: '/tienda/combo-community-manager.webp', alt: 'Los dos libros juntos con un sello que dice: lleva los dos por $30.000' },
-  { name: 'Planner mensual para Community Managers', old: '$25.000', price: '$19.990', off: '20% OFF', img: '/tienda/planner-community-managers.webp', alt: 'Libro Planner mensual para Community Managers, by Crudo_' },
-  { name: 'Guía del Community Manager desde casa', old: '$45.000', price: '$39.990', off: '11% OFF', img: '/tienda/guia-community-manager.webp', alt: 'Libro Community Manager desde casa, by Crudo_' },
+  { name: 'Guía CM desde casa + Planner mensual', href: 'https://mpago.la/2ygE6Pv', old: '$60.000', price: '$30.000', off: '50% OFF', img: '/tienda/combo-community-manager.webp', alt: 'Los dos libros juntos con un sello que dice: lleva los dos por $30.000' },
+  { name: 'Planner mensual para Community Managers', href: 'https://mpago.la/2EHntvY', old: '$25.000', price: '$19.990', off: '20% OFF', img: '/tienda/planner-community-managers.webp', alt: 'Libro Planner mensual para Community Managers, by Crudo_' },
+  { name: 'Guía del Community Manager desde casa', href: 'https://mpago.la/34i9sU2', old: '$45.000', price: '$39.990', off: '11% OFF', img: '/tienda/guia-community-manager.webp', alt: 'Libro Community Manager desde casa, by Crudo_' },
 ];
 
 export const STEPS = [
@@ -90,7 +90,7 @@ export const PROJECTS: Project[] = [
   },
   {
     n: '02', slug: 'mart-bakery', cliente: 'Mart Bakery', rubro: 'Panadería y pastelería', servicios: ['Branding', 'Diseño', 'Impresiones'],
-    desc: 'Una panadería con letra manuscrita y mucho dulce. Un logotipo hecho a mano, stickers de tortas ilustradas y packaging color manteca que se ve tan bien como sabe.',
+    desc: 'Una pastelería con letra manuscrita y mucho dulce. Un logotipo hecho a mano, stickers de tortas ilustradas y packaging color manteca que se ve tan bien como sabe.',
     entregables: ['Logotipo y variantes', 'Stickers ilustrados', 'Packaging y cajas', 'Delantal y uniformes', 'Toldo y señalética'],
     bg: '#fcecb3', ink: '#392823', accent: '#82242a', palette: ['#fcecb3', '#82242a', '#cad7e8', '#392823'],
   },
@@ -103,7 +103,7 @@ export const PROJECTS: Project[] = [
   {
     n: '04', slug: 'nube-skin', cliente: 'Nube Skin', rubro: 'Cuidado de la piel', servicios: ['Branding', 'Diseño', 'Social media'],
     desc: 'Un logo que parece una nube de perla. Letras infladas en 3D, azul pervinca y un universo suave para una marca de skincare que se lanzó con intriga.',
-    entregables: ['Logo y monograma 3D', 'Stickers', 'Moodboard', 'Lanzamiento “coming soon”', 'Contenido para redes'],
+    entregables: ['Logo y monograma 3D', 'Moodboard', 'Lanzamiento “coming soon”', 'Contenido para redes'],
     bg: '#b4c8ed', ink: '#1f2a4a', accent: '#ffffff', palette: ['#b4c8ed', '#e6eef4', '#cabbc2', '#8a9cb6'],
   },
   {
@@ -120,14 +120,14 @@ export const PROJECTS: Project[] = [
   },
   {
     n: '07', slug: 'da-vinci', cliente: 'Clínica Dental Da Vinci', rubro: 'Odontología', servicios: ['Branding'],
-    desc: 'Un diente que lleva adentro al Hombre de Vitruvio. Trazo fino, azul marino y una tipografía sobria para una clínica que combina precisión y arte.',
+    desc: 'Una muela que lleva adentro al Hombre de Vitruvio. Trazo fino, azul marino y una tipografía sobria para una clínica que combina precisión y arte.',
     entregables: ['Isotipo y logotipo', 'Variantes en positivo y negativo', 'Guía de marca'],
     bg: '#2a3255', ink: '#eff2f7', accent: '#9fb4ff', palette: ['#2a3255', '#eff2f7'], coverBg: '#2a3255', long: true,
   },
   {
-    n: '08', slug: 'anma', cliente: 'ANMA Beauty', rubro: 'Belleza', servicios: ['Branding'],
-    desc: 'Letras minúsculas, un verde lima que se nota y un azul pizarra que calma. El sistema de logos de ANMA Beauty: principal, secundario y marcas de agua.',
-    entregables: ['Logotipo principal y secundario', 'Monograma', 'Marcas de agua', 'Guía de marca'],
+    n: '08', slug: 'anma', cliente: 'ANMA Beauty', rubro: 'Belleza', servicios: ['Branding', 'Social media'],
+    desc: 'Letras minúsculas, un verde lima que se nota y un azul pizarra que calma. El sistema de logos de ANMA Beauty —principal, secundario y marcas de agua— y las piezas de redes para lanzar su bruma Matifix.',
+    entregables: ['Logotipo principal y secundario', 'Monograma', 'Marcas de agua', 'Guía de marca', 'Fotos de producto', 'Contenido para redes'],
     bg: '#ebf263', ink: '#2f4a5c', accent: '#2f4a5c', palette: ['#ebf263', '#3f5b6d', '#ddf1fc', '#fbf7f4'], coverBg: '#3f5b6d',
   },
 ];

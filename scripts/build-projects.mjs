@@ -75,22 +75,20 @@ const PROJECTS = {
   },
   'nube-skin': {
     dir: 'NUBE SKIN', name: 'Nube Skin',
-    cover: [27, 'Logo Nube Skin sobre un cielo con nubes'],
+    cover: ['PORTADA WEB NUBE.png', 'Logo Nube Skin en 3D perlado sobre un cielo de nubes al atardecer'],
     gallery: [
-      [0, 'Monograma NS en 3D sobre azul'],
-      [4, 'Logo Nube Skin en 3D perlado sobre azul'],
-      [3, 'Estrella perlada de la marca'],
-      [5, 'Monograma NS en perla'],
-      [13, 'Sticker redondo con el logo Nube Skin'],
-      [14, 'Sticker redondo con el monograma NS'],
-      [19, 'Moodboard de Nube Skin'],
-      [20, 'Persona en la bañera con el logo Nube Skin'],
-      [22, 'Rostro con mascarilla y pincel, para el lanzamiento'],
-      [24, 'Piel con gotas de agua y el logo Nube Skin'],
-      [26, 'Hombro mojado con el logo Nube Skin'],
-      [23, 'Pieza "coming soon" para redes'],
-      [1, 'Pieza de redes: ¿cómo comprar?'],
-      [2, 'Pieza de redes: newbies'],
+      ['LOGOS + VARIACIONES/1x/1x/Mesa de trabajo 1 copia 2.png', 'Monograma NS en 3D sobre azul'],
+      ['LOGOS + VARIACIONES/1x/LOGO PRINCIPAL.png', 'Logo Nube Skin en 3D perlado sobre azul'],
+      ['LOGOS + VARIACIONES/1x/1x/Mesa de trabajo 1_1.png', 'Estrella perlada de la marca'],
+      ['LOGOS + VARIACIONES/1x/LOGO SECUNDARIO.png', 'Monograma NS en perla'],
+      ['NUBESKIN (ARCHIVOS IMPORTANTES)/MOODBOARD.png', 'Moodboard de Nube Skin'],
+      ['POSTS/1.png', 'Persona en la bañera con el logo Nube Skin'],
+      ['POSTS/1x/2.png', 'Rostro con mascarilla y pincel, para el lanzamiento'],
+      ['POSTS/1x/4.png', 'Piel con gotas de agua y el logo Nube Skin'],
+      ['POSTS/3.png', 'Hombro mojado con el logo Nube Skin'],
+      ['POSTS/1x/3.png', 'Pieza "coming soon" para redes'],
+      ['LOGOS + VARIACIONES/1x/1x/Mesa de trabajo 1 copia.png', 'Pieza de redes: ¿cómo comprar?'],
+      ['LOGOS + VARIACIONES/1x/1x/Mesa de trabajo 1.png', 'Pieza de redes: newbies'],
     ],
   },
   archetype: {
@@ -130,7 +128,6 @@ const PROJECTS = {
       [29, 'Persona sonriendo junto a la ventana con su torta'],
       [30, 'Persona en el local con torta y bebida'],
       [35, 'Persona disfrutando de la torta con un café helado'],
-      [1, 'Mesa de mármol vista desde arriba'],
       [24, 'Torta de zanahoria sobre la barra'],
       [8, 'Mesa del local con pared pintada', 'wide'],
     ],
@@ -140,7 +137,7 @@ const PROJECTS = {
     cover: [1, 'Logo de Clínica Dental Da Vinci en blanco sobre azul marino'],
     gallery: [
       [0, 'Logo horizontal de Clínica Dental Da Vinci en azul'],
-      [2, 'Isotipo: un diente con el hombre de Vitruvio'],
+      [2, 'Isotipo: una muela con el hombre de Vitruvio'],
       [3, 'Tipografía de la marca Clínica Dental Da Vinci'],
       [4, 'Tipografía de la marca en blanco sobre azul'],
       [5, 'Isotipo en blanco sobre azul marino'],
@@ -148,23 +145,35 @@ const PROJECTS = {
   },
   anma: {
     dir: 'ANMA BEAUTY', name: 'ANMA Beauty',
-    cover: [2, 'Logo ANMA Beauty en verde lima sobre azul pizarra'],
+    cover: ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 3.png', 'Logo ANMA Beauty en verde lima sobre azul pizarra'],
     gallery: [
-      [0, 'Logo ANMA Beauty en azul sobre lima'],
-      [1, 'Logo ANMA Beauty en azul sobre celeste'],
-      [3, 'Logo ANMA Beauty en celeste sobre azul'],
-      [4, 'Logo ANMA Beauty en crema sobre azul'],
-      [6, 'Logo ANMA Beauty en azul sobre crema'],
-      [8, 'Monograma anma en azul sobre lima'],
-      [10, 'Monograma anma en lima sobre azul'],
-      [12, 'Monograma anma en blanco sobre azul'],
-      [13, 'Monograma anma en azul sobre crema'],
-      [7, 'Monograma anma en azul sobre celeste'],
-      [11, 'Monograma anma en crema sobre azul'],
+      ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 1.png', 'Logo ANMA Beauty en azul sobre lima'],
+      ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 2.png', 'Logo ANMA Beauty en azul sobre celeste'],
+      ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 4.png', 'Logo ANMA Beauty en celeste sobre azul'],
+      ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 5.png', 'Logo ANMA Beauty en crema sobre azul'],
+      ['Logo_Monograma/LOGO/PRINCIPAL/ANMA 7.png', 'Logo ANMA Beauty en azul sobre crema'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 2.png', 'Monograma anma en azul sobre lima'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 4.png', 'Monograma anma en lima sobre azul'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 6.png', 'Monograma anma en blanco sobre azul'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 7.png', 'Monograma anma en azul sobre crema'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 1.png', 'Monograma anma en azul sobre celeste'],
+      ['Logo_Monograma/LOGO/SECUNDARIO/S ANMA 5.png', 'Monograma anma en crema sobre azul'],
+      ['Anuncio de bruma Matifix flotante.png', 'Anuncio de la bruma Matifix: modelo con el frasco rodeada de frascos flotando'],
+      ['Bruma Matificante Anma en Azul.png', 'Frasco de bruma Matifix sobre una bandeja metálica y fondo azul'],
+      ['Bruma de spray con botella ámbar.png', 'Primer plano del frasco Matifix rociando la bruma'],
+      ['Bruma dorada al aire libre.png', 'Persona rociándose la bruma Matifix al aire libre'],
+      ['Bruma mate en bolso de cuero.png', 'Mano guardando el frasco Matifix en un bolso de cuero'],
+      ['Retrato editorial con bruma fijadora anma.png', 'Retrato editorial con el frasco Matifix en la mano'],
+      ['Retrato editorial con spray Matifix y bolso lima.png', 'Retrato con el frasco Matifix y un bolso verde lima'],
+      ['Retrato editorial con spray matificante.png', 'Retrato con gafas de sol sosteniendo el frasco Matifix'],
+      ['Spray MATIFIX en bolsillo de mezclilla anma.png', 'Frasco Matifix en el bolsillo de un jean con llavero de corazón'],
+      ['posteo 1.png', 'Historia de Instagram: la belleza no tiene que ser complicada', 'stories'],
     ],
   },
 };
 
+const only = process.argv.slice(2);
+const pick = (files, dir, i) => (typeof i === 'string' ? path.join(dir, i) : files[i]);
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
 
 async function emit(file, dest, { max, quality }) {
@@ -175,9 +184,10 @@ async function emit(file, dest, { max, quality }) {
   return { w: out.width, h: out.height, kb: Math.round(out.size / 1024) };
 }
 
-const manifest = {};
+const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : {};
 let totalKb = 0;
 for (const [slug, cfg] of Object.entries(PROJECTS)) {
+  if (only.length && !only.includes(slug)) continue;
   const dir = path.join(SRC, cfg.dir);
   const files = walk(dir).filter((f) => /\.(png|jpe?g)$/i.test(f)).sort();
   const outDir = path.join(OUT, slug);
@@ -186,14 +196,14 @@ for (const [slug, cfg] of Object.entries(PROJECTS)) {
   const m = { name: cfg.name, gallery: [] };
 
   const [ci, calt] = cfg.cover;
-  const c = await emit(files[ci], path.join(outDir, 'cover.webp'), { max: 2000, quality: 80 });
+  const c = await emit(pick(files, dir, ci), path.join(outDir, 'cover.webp'), { max: 2000, quality: 80 });
   m.cover = { src: `/proyectos/${slug}/cover.webp`, w: c.w, h: c.h, alt: calt };
   totalKb += c.kb;
 
   let n = 1;
   for (const [i, alt, group] of cfg.gallery) {
     const name = `${String(n++).padStart(2, '0')}.webp`;
-    const r = await emit(files[i], path.join(outDir, name), { max: 1500, quality: 78 });
+    const r = await emit(pick(files, dir, i), path.join(outDir, name), { max: 1500, quality: 78 });
     m.gallery.push({ src: `/proyectos/${slug}/${name}`, w: r.w, h: r.h, alt, ...(group ? { group } : {}) });
     totalKb += r.kb;
   }

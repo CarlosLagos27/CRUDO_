@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { PROJECTS, PROJECT_MEDIA, SERVICES, type Project, type ProjectImage } from '@/lib/data';
 import Lightbox from '@/components/Lightbox';
 import AutoVideo from '@/components/AutoVideo';
+import VideoLightbox from '@/components/VideoLightbox';
 
 const ALL = 'Todos';
 const FILTERS = SERVICES.filter((s) => PROJECTS.some((p) => p.servicios.includes(s)));
@@ -101,6 +102,7 @@ function Peek({ slug }: { slug: string }) {
 export default function ProjectsList() {
   const [filter, setFilter] = useState(ALL);
   const [box, setBox] = useState<{ slug: string; i: number } | null>(null);
+  const [vbox, setVbox] = useState<string | null>(null);
   const [peek, setPeek] = useState('');
   const [rail, setRail] = useState(false);
   const [active, setActive] = useState('');
@@ -369,10 +371,11 @@ export default function ProjectsList() {
               {nStory > 0 && (
                 <>
                   <span className="label pj__sub">Historias{hasVideo ? ' y video' : ''}</span>
-                  <div className="pj__stories" style={css({ '--n': Math.min(nStory, 6) })}>
+                  <div className="pj__stories" style={css({ '--n': Math.max(4, Math.min(nStory, 6)) })}>
                     {hasVideo && (
                       <div className="pj__tile pj__tile--vid" style={css({ '--i': 0 })}>
                         <AutoVideo src={m.video!.src} poster={m.cover.src} label={`Secuencia de ${p.cliente}`} />
+                        <button type="button" className="pj__vid-zoom label" onClick={() => setVbox(p.slug)} aria-label={`Ampliar video de ${p.cliente}`}>Ampliar</button>
                       </div>
                     )}
                     {stories.map((g, i) => (
@@ -433,6 +436,10 @@ export default function ProjectsList() {
           </a>
         ))}
       </nav>
+
+      {vbox && PROJECT_MEDIA[vbox]?.video && (
+        <VideoLightbox src={PROJECT_MEDIA[vbox].video!.src} poster={PROJECT_MEDIA[vbox].cover.src} title={PROJECTS.find((x) => x.slug === vbox)?.cliente ?? ''} onClose={() => setVbox(null)} />
+      )}
 
       {box && boxProject && (
         <Lightbox

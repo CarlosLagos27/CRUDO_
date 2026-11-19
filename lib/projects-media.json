@@ -311,60 +311,48 @@
       },
       {
         "src": "/proyectos/nube-skin/05.webp",
-        "w": 1500,
-        "h": 1125,
-        "alt": "Sticker redondo con el logo Nube Skin"
-      },
-      {
-        "src": "/proyectos/nube-skin/06.webp",
-        "w": 1500,
-        "h": 1125,
-        "alt": "Sticker redondo con el monograma NS"
-      },
-      {
-        "src": "/proyectos/nube-skin/07.webp",
         "w": 820,
         "h": 1500,
         "alt": "Moodboard de Nube Skin"
       },
       {
-        "src": "/proyectos/nube-skin/08.webp",
+        "src": "/proyectos/nube-skin/06.webp",
         "w": 1200,
         "h": 1500,
         "alt": "Persona en la bañera con el logo Nube Skin"
       },
       {
-        "src": "/proyectos/nube-skin/09.webp",
+        "src": "/proyectos/nube-skin/07.webp",
         "w": 1080,
         "h": 1350,
         "alt": "Rostro con mascarilla y pincel, para el lanzamiento"
       },
       {
-        "src": "/proyectos/nube-skin/10.webp",
+        "src": "/proyectos/nube-skin/08.webp",
         "w": 1080,
         "h": 1350,
         "alt": "Piel con gotas de agua y el logo Nube Skin"
       },
       {
-        "src": "/proyectos/nube-skin/11.webp",
+        "src": "/proyectos/nube-skin/09.webp",
         "w": 1207,
         "h": 1500,
         "alt": "Hombro mojado con el logo Nube Skin"
       },
       {
-        "src": "/proyectos/nube-skin/12.webp",
+        "src": "/proyectos/nube-skin/10.webp",
         "w": 1080,
         "h": 1350,
         "alt": "Pieza \"coming soon\" para redes"
       },
       {
-        "src": "/proyectos/nube-skin/13.webp",
+        "src": "/proyectos/nube-skin/11.webp",
         "w": 1080,
         "h": 1081,
         "alt": "Pieza de redes: ¿cómo comprar?"
       },
       {
-        "src": "/proyectos/nube-skin/14.webp",
+        "src": "/proyectos/nube-skin/12.webp",
         "w": 1080,
         "h": 1080,
         "alt": "Pieza de redes: newbies"
@@ -372,9 +360,9 @@
     ],
     "cover": {
       "src": "/proyectos/nube-skin/cover.webp",
-      "w": 1200,
-      "h": 1200,
-      "alt": "Logo Nube Skin sobre un cielo con nubes"
+      "w": 2000,
+      "h": 1125,
+      "alt": "Logo Nube Skin en 3D perlado sobre un cielo de nubes al atardecer"
     }
   },
   "archetype": {
@@ -557,18 +545,12 @@
       },
       {
         "src": "/proyectos/malcriada/13.webp",
-        "w": 1200,
-        "h": 1500,
-        "alt": "Mesa de mármol vista desde arriba"
-      },
-      {
-        "src": "/proyectos/malcriada/14.webp",
         "w": 844,
         "h": 1500,
         "alt": "Torta de zanahoria sobre la barra"
       },
       {
-        "src": "/proyectos/malcriada/15.webp",
+        "src": "/proyectos/malcriada/14.webp",
         "w": 1500,
         "h": 844,
         "alt": "Mesa del local con pared pintada",
@@ -595,7 +577,7 @@
         "src": "/proyectos/da-vinci/02.webp",
         "w": 1080,
         "h": 1081,
-        "alt": "Isotipo: un diente con el hombre de Vitruvio"
+        "alt": "Isotipo: una muela con el hombre de Vitruvio"
       },
       {
         "src": "/proyectos/da-vinci/03.webp",
@@ -691,6 +673,67 @@
         "w": 1081,
         "h": 1081,
         "alt": "Monograma anma en crema sobre azul"
+      },
+      {
+        "src": "/proyectos/anma/12.webp",
+        "w": 1145,
+        "h": 1374,
+        "alt": "Anuncio de la bruma Matifix: modelo con el frasco rodeada de frascos flotando"
+      },
+      {
+        "src": "/proyectos/anma/13.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Frasco de bruma Matifix sobre una bandeja metálica y fondo azul"
+      },
+      {
+        "src": "/proyectos/anma/14.webp",
+        "w": 1000,
+        "h": 1500,
+        "alt": "Primer plano del frasco Matifix rociando la bruma"
+      },
+      {
+        "src": "/proyectos/anma/15.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Persona rociándose la bruma Matifix al aire libre"
+      },
+      {
+        "src": "/proyectos/anma/16.webp",
+        "w": 1000,
+        "h": 1500,
+        "alt": "Mano guardando el frasco Matifix en un bolso de cuero"
+      },
+      {
+        "src": "/proyectos/anma/17.webp",
+        "w": 1145,
+        "h": 1374,
+        "alt": "Retrato editorial con el frasco Matifix en la mano"
+      },
+      {
+        "src": "/proyectos/anma/18.webp",
+        "w": 1032,
+        "h": 1500,
+        "alt": "Retrato con el frasco Matifix y un bolso verde lima"
+      },
+      {
+        "src": "/proyectos/anma/19.webp",
+        "w": 1000,
+        "h": 1500,
+        "alt": "Retrato con gafas de sol sosteniendo el frasco Matifix"
+      },
+      {
+        "src": "/proyectos/anma/20.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Frasco Matifix en el bolsillo de un jean con llavero de corazón"
+      },
+      {
+        "src": "/proyectos/anma/21.webp",
+        "w": 844,
+        "h": 1500,
+        "alt": "Historia de Instagram: la belleza no tiene que ser complicada",
+        "group": "stories"
       }
     ],
     "cover": {

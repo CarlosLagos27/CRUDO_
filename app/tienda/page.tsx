@@ -46,8 +46,7 @@ export default function Tienda() {
               Un sobre por mes con papelería, stickers y pasatiempos hechos por Crudo_. Cada edición tiene su tema, su color y su historia: abrilo y mirá qué trae.
             </p>
             <div className="mc-intro__row">
-              <p className="label">[PRECIO]</p>
-              <a href="#" className="btn btn--ink" aria-disabled="true">Sumate ↗ [LINK DE PAGO]</a>
+              <a href="https://mpago.la/2qcZfqo" className="btn btn--ink" target="_blank" rel="noopener noreferrer">Sumate ↗</a>
             </div>
           </div>
         </section>
@@ -66,7 +65,7 @@ export default function Tienda() {
                   <h3 className="product__t">{p.name}</h3>
                   <s className="product__old">{p.old}</s>
                   <p className="product__now"><b>{p.price}</b><span>{p.off}</span></p>
-                  <Link href="/contacto/" className="btn btn--cream">Comprar</Link>
+                  <a href={p.href} className="btn btn--cream" target="_blank" rel="noopener noreferrer">Comprar ↗</a>
                 </article>
               ))}
             </div>

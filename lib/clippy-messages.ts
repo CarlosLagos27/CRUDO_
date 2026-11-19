@@ -93,7 +93,7 @@ export const SAY_PJ: Record<string, string[]> = {
   'nube-skin': ['Nube Skin: tan suave como una nube.', 'Ese logo parece de perla.', 'Letras infladas en 3D, ¡qué lujo!', 'Cuidar la piel también es diseño.'],
   archetype: ['Archetype: mucho concreto y rojo señal.', 'Berlín nos queda perfecta.', 'Esa A gigante es tremenda.', 'El video está en loop, ¡miralo!'],
   malcriada: ['Esa torta de zanahoria me llama.', 'Luz de ventana y café con leche.', 'Malcriada sale muy bien en foto.', '¿Quién se anima a una porción?'],
-  'da-vinci': ['¡Un diente con el Hombre de Vitruvio!', 'Precisión y arte en un solo logo.', 'Da Vinci cuida las sonrisas.', 'Azul marino, muy elegante.'],
+  'da-vinci': ['¡Una muela con el Hombre de Vitruvio!', 'Precisión y arte en un solo logo.', 'Da Vinci cuida las sonrisas.', 'Azul marino, muy elegante.'],
   anma: ['ANMA: el verde lima se nota.', 'Minúsculas y mucho estilo.', 'Principal, secundario y marcas de agua.', 'Ese azul pizarra calma.'],
 };
 

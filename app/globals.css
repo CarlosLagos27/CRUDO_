@@ -883,6 +883,8 @@ html.js .pj__tile.is-seen, html.rv-fallback .pj__tile { opacity: 1; transform: n
 .pj__stories .pj__tile img { height: 100%; object-fit: cover; }
 .pj__vid { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: #000; cursor: pointer; }
 .pj__vid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pj__tile--vid::after { content: none; }
+.pj__vid-zoom { position: absolute; right: 12px; bottom: 12px; z-index: 2; padding: 6px 12px; border: 0; border-radius: var(--radius-pill); background: var(--pj-ink); color: var(--pj-bg); cursor: zoom-in; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
 .pj__vid-state { position: absolute; left: 12px; bottom: 12px; padding: 5px 10px; border-radius: var(--radius-pill); background: var(--pj-ink); color: var(--pj-bg); }
 
 /* visor */
